@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/jpeg" href="images/favicon.jpeg?v=2">
+<title>Advisors | Coordinators | IIT Dharwad</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; font-size: 14px; color: #333; background: #fff; }
+
+  /* Top purple strip */
+  .top-bar {
+    background: #6a1a7a;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .top-bar a { color: #fff; text-decoration: none; }
+  .top-bar a:hover { text-decoration: underline; }
+  .top-bar .search-box {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .top-bar input {
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: none;
+    font-size: 12px;
+  }
+  .top-bar .font-controls { display: flex; gap: 5px; align-items: center; }
+  .top-bar .font-controls span { cursor: pointer; }
+
+  /* Header / Logo area */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    border-bottom: 1px solid #ddd;
+  }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-area img { height: 60px; }
+  .logo-text { line-height: 1.3; }
+  .logo-text .hindi { font-size: 11px; color: #555; }
+  .logo-text .english { font-size: 13px; font-weight: bold; color: #333; }
+  .logo-text .sub { font-size: 11px; color: #555; }
+
+  /* Main nav */
+  .main-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    padding: 0 40px 8px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #333;
+  }
+  .main-nav a { text-decoration: none; color: #333; }
+  .main-nav a:hover { color: #6a1a7a; }
+
+  /* Page title */
+  .page-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 30px 0 20px;
+    color: #222;
+  }
+
+  /* Category icons row */
+  .category-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 40px 30px;
+    flex-wrap: wrap;
+  }
+  .cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 90px;
+    background: #7b2d8b;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cat-item:hover { background: #5a1e6b; }
+  .cat-item.active { background: #9b3dab; }
+  .cat-item svg { width: 34px; height: 34px; fill: #fff; margin-bottom: 6px; }
+  .cat-item span { font-size: 11px; font-weight: bold; letter-spacing: 0.5px; text-align: center; }
+
+  /* Table */
+  .table-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0 40px 60px;
+  }
+  table {
+    width: 620px;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead tr {
+    background: #6a1a7a;
+    color: #fff;
+  }
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: normal;
+    font-size: 13px;
+  }
+  tbody tr { border-bottom: 1px solid #ddd; }
+  tbody tr:nth-child(even) { background: #fafafa; }
+  tbody td { padding: 10px 14px; vertical-align: top; line-height: 1.6; }
+  tbody td a { color: #6a1a7a; text-decoration: none; }
+  tbody td a:hover { text-decoration: underline; }
+
+  /* Footer */
+  footer {
+    background: #6a1a7a;
+    color: #fff;
+    padding: 30px 60px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    font-size: 12px;
+  }
+  footer .address p { line-height: 1.8; }
+  footer .address .contact-icon { margin-top: 10px; }
+  footer h4 { font-size: 12px; font-weight: bold; margin-bottom: 8px; letter-spacing: 0.5px; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 4px; }
+  footer ul li a { color: #ddd; text-decoration: none; font-size: 11px; }
+  footer ul li a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="top-bar">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Leadership</a>
+  <a href="#">Recruitment</a>
+  <a href="#">Notifications</a>
+  <a href="#">Alumni &amp; Wellwishers</a>
+  <a href="#">NIRF</a>
+  <div class="search-box">
+    <input type="text" placeholder="Search...">
+    <span>🔍</span>
+  </div>
+  <div class="font-controls">
+    <span title="Decrease font">A-</span>
+    <span title="Reset font">A</span>
+    <span title="Increase font">A+</span>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo-area">
+    <!-- IIT Dharwad Logo SVG placeholder -->
+    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="60" fill="#f0f0f0" rx="4"/>
+      <text x="5" y="35" font-size="8" fill="#6a1a7a" font-weight="bold">IIT</text>
+      <text x="5" y="48" font-size="6" fill="#555">Dharwad</text>
+    </svg>
+    <div class="logo-text">
+      <div class="hindi">भारतीय प्रौद्योगिकी संस्थान धारवाड़</div>
+      <div class="hindi">भारतीय प्रौद्योगिकी संस्थान धारवाड</div>
+      <div class="english">INDIAN INSTITUTE OF TECHNOLOGY DHARWAD</div>
+    </div>
+  </div>
+</div>
+
+<!-- Main nav -->
+<div class="main-nav">
+  <a href="#">ACADEMICS</a>
+  <a href="#">ADMISSIONS</a>
+  <a href="#">CAMPUS LIFE</a>
+  <a href="#">RESEARCH</a>
+</div>
+
+<!-- Page title -->
+<div class="page-title">Advisors | Coordinators</div>
+
+<!-- Category icons -->
+<div class="category-row">
+  <!-- Faculty -->
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+    </svg>
+    <span>FACULTY</span>
+  </a>
+  <!-- RA/IPDF -->
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+    </svg>
+    <span>RA/IPDF</span>
+  </a>
+  <!-- Staff -->
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+    </svg>
+    <span>STAFF</span>
+  </a>
+  <!-- Research Scholars -->
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+    </svg>
+    <span>RESEARCH SCHOLARS</span>
+  </a>
+  <!-- Advisors (active) -->
+  <a href="#" class="cat-item active">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+    </svg>
+    <span>ADVISORS</span>
+  </a>
+  <!-- Former Associates -->
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2zm0 3.28L9.74 9.97l-5.18.75 3.75 3.65-.89 5.16L12 16.9l4.58 2.63-.89-5.16 3.75-3.65-5.18-.75L12 5.28z"/>
+    </svg>
+    <span>FORMER ASSOCIATES</span>
+  </a>
+</div>
+
+<!-- Table -->
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Advisory | Coordinator</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Group Captain Dr Prahlad S Joshi</td>
+        <td>Professor of Practice-cum-Campus Management Advisor</td>
+      </tr>
+      <tr>
+        <td>PROF K V Jayakumar</td>
+        <td>Visiting Professor-cum-Outreach Advisor &amp; <a href="#">GIAN Coordinator</a></td>
+      </tr>
+      <tr>
+        <td>PRof Naveen M B</td>
+        <td>Senior Faculty Advisor (CDC)</td>
+      </tr>
+      <tr>
+        <td>Prof Samarth S Raut</td>
+        <td>
+          <a href="#">PMRF Institute Nodal Coordinator</a><br>
+          <a href="#">Visvesvaraya PhD Fellowship Institute Nodal Coordinator</a><br>
+          <a href="#">Study-In-India Institute Nodal Coordinator</a>
+        </td>
+      </tr>
+      <tr>
+        <td>PROF Sanatkumar P Rajamane</td>
+        <td>Honorary Professor of Practice and Advisor IPS</td>
+      </tr>
+      <tr>
+        <td>Dr D Lakshmanan</td>
+        <td><a href="#">Advisor (Finance &amp; Accounts)</a></td>
+      </tr>
+      <tr>
+        <td>Shri Y S Dixit</td>
+        <td>Officer On Special Duty(<a href="#">Civil</a>), Infrastructure, Planning &amp; Support (IPS) Section</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="address">
+    <p>
+      INDIAN INSTITUTE OF TECHNOLOGY DHARWAD<br>
+      PERMANENT CAMPUS<br>
+      CHIKKAMALLIGAWAD<br>
+      DHARWAD - 580 011<br>
+      KARNATAKA<br>
+      BHARATA (INDIA)
+    </p>
+    <p class="contact-icon">✉ pro@iitdh.ac.in</p>
+    <p>📞 Contact Us</p>
+  </div>
+
+  <div>
+    <h4>ACADEMICS</h4>
+    <ul>
+      <li><a href="#">Announcements</a></li>
+      <li><a href="#">Departments</a></li>
+      <li><a href="#">Programs</a></li>
+      <li><a href="#">B.Tech Admissions</a></li>
+      <li><a href="#">BS Admissions</a></li>
+      <li><a href="#">M.Sc. Admissions</a></li>
+      <li><a href="#">M.Tech Admissions</a></li>
+      <li><a href="#">M.Tech (R) Admissions SCIF</a></li>
+      <li><a href="#">Ph.D Admissions</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>RESEARCH</h4>
+    <ul>
+      <li><a href="#">Consultancy Projects</a></li>
+      <li><a href="#">IRINS</a></li>
+      <li><a href="#">Project Vacancies</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">Sponsored Projects</a></li>
+      <li><a href="#">R&amp;D Website</a></li>
+      <li><a href="#">Incubation Center</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>PEOPLE</h4>
+    <ul>
+      <li><a href="#">Administration</a></li>
+      <li><a href="#">Faculty</a></li>
+      <li><a href="#">RA/PDF</a></li>
+      <li><a href="#">Research Scholars</a></li>
+      <li><a href="#">Staff</a></li>
+      <li><a href="#">Students</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>QUICK ACCESS</h4>
+    <ul>
+      <li><a href="#">About DHARWAD</a></li>
+      <li><a href="#">Anti-Ragging Cell</a></li>
+      <li><a href="#">Chief Vigilance Officer</a></li>
+      <li><a href="#">Counselling Center</a></li>
+      <li><a href="#">Crèche Facility</a></li>
+      <li><a href="#">CSR Contribution</a></li>
+      <li><a href="#">Doctors' Availability</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Grievance Redressal</a></li>
+      <li><a href="#">ICC</a></li>
+      <li><a href="#">Intranet</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

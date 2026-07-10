@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/jpeg" href="images/favicon.jpeg?v=2">
+<title>Former Associates | IIT Dharwad</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; font-size: 14px; color: #333; background: #fff; }
+
+  /* Top purple strip */
+  .top-bar {
+    background: #6a1a7a;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .top-bar a { color: #fff; text-decoration: none; }
+  .top-bar a:hover { text-decoration: underline; }
+  .top-bar .search-box { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  .top-bar input { padding: 2px 8px; border-radius: 3px; border: none; font-size: 12px; }
+  .top-bar .font-controls { display: flex; gap: 5px; align-items: center; }
+  .top-bar .font-controls span { cursor: pointer; }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    border-bottom: 1px solid #ddd;
+  }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-text .hindi { font-size: 11px; color: #555; }
+  .logo-text .english { font-size: 13px; font-weight: bold; color: #333; }
+
+  /* Main nav */
+  .main-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    padding: 6px 40px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #eee;
+  }
+  .main-nav a { text-decoration: none; color: #333; }
+  .main-nav a:hover { color: #6a1a7a; }
+
+  /* Page title */
+  .page-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 30px 0 20px;
+  }
+
+  /* Category icons row */
+  .category-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 40px 24px;
+    flex-wrap: wrap;
+  }
+  .cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 90px;
+    background: #7b2d8b;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cat-item:hover { background: #5a1e6b; }
+  .cat-item.active { background: #9b3dab; }
+  .cat-item svg { width: 34px; height: 34px; fill: #fff; margin-bottom: 6px; }
+  .cat-item span { font-size: 10px; font-weight: bold; letter-spacing: 0.5px; text-align: center; line-height: 1.3; }
+
+  /* Sub-tab buttons */
+  .sub-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 0 60px 30px;
+  }
+  .sub-tab {
+    padding: 6px 16px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 2px;
+  }
+  .sub-tab.active { background: #e07000; color: #fff; border-color: #e07000; }
+
+  /* Section headings */
+  .section-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 10px 0 20px;
+    color: #222;
+  }
+
+  /* Profile card grid */
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 860px;
+    margin: 0 auto 30px;
+    padding: 0 20px;
+  }
+  .profile-grid.single { grid-template-columns: 1fr; max-width: 430px; }
+
+  .profile-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    border: 1px solid #ddd;
+    padding: 16px;
+    background: #fff;
+  }
+  .profile-card img {
+    width: 110px;
+    height: 130px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #ccc;
+  }
+  .profile-card .placeholder-img {
+    width: 110px;
+    height: 130px;
+    background: #e0e0e0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 11px;
+  }
+  .profile-info .name { font-size: 15px; font-weight: normal; color: #222; margin-bottom: 4px; }
+  .profile-info .role { font-size: 13px; font-weight: bold; color: #222; margin-bottom: 2px; }
+  .profile-info .role-extra { font-size: 13px; font-weight: bold; color: #222; margin-top: 8px; margin-bottom: 2px; }
+  .profile-info .period { font-size: 13px; color: #444; font-style: italic; }
+
+  /* Footer */
+  footer {
+    background: #6a1a7a;
+    color: #fff;
+    padding: 30px 60px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    font-size: 12px;
+    margin-top: 40px;
+  }
+  footer .address p { line-height: 1.8; }
+  footer h4 { font-size: 12px; font-weight: bold; margin-bottom: 8px; letter-spacing: 0.5px; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 3px; }
+  footer ul li a { color: #ddd; text-decoration: none; font-size: 11px; }
+  footer ul li a:hover { color: #fff; }
+  .footer-bottom { background: #5a1068; color: #ddd; text-align: center; padding: 8px; font-size: 11px; }
+  .footer-bottom a { color: #ddd; }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="top-bar">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Leadership</a>
+  <a href="#">Recruitment</a>
+  <a href="#">Notifications</a>
+  <a href="#">Alumni &amp; Wellwishers</a>
+  <a href="#">NIRF</a>
+  <div class="search-box">
+    <input type="text" placeholder="Search...">
+    <span>🔍</span>
+  </div>
+  <div class="font-controls">
+    <span>A-</span><span>A</span><span>A+</span>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo-area">
+    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="60" fill="#f5f5f5" rx="4"/>
+      <text x="5" y="22" font-size="7" fill="#6a1a7a" font-weight="bold">ಭಾರತೀಯ</text>
+      <text x="5" y="32" font-size="6" fill="#555">ತಂತ್ರಜ್ಞಾನ</text>
+      <text x="5" y="42" font-size="7" fill="#6a1a7a" font-weight="bold">IIT</text>
+      <text x="5" y="52" font-size="6" fill="#555">Dharwad</text>
+    </svg>
+    <div class="logo-text">
+      <div class="hindi">ಭಾರತೀಯ ತಂತ್ರಜ್ಞಾನ ಸಂಸ್ಥೆ ಧಾರವಾಡ</div>
+      <div class="hindi">भारतीय प्रौद्योगिकी संस्थान धारवाड</div>
+      <div class="english">INDIAN INSTITUTE OF TECHNOLOGY DHARWAD</div>
+    </div>
+  </div>
+</div>
+
+<!-- Main nav -->
+<div class="main-nav">
+  <a href="#">ACADEMICS</a>
+  <a href="#">ADMISSIONS</a>
+  <a href="#">CAMPUS LIFE</a>
+  <a href="#">RESEARCH</a>
+</div>
+
+<!-- Page title -->
+<div class="page-title">Former Associates</div>
+
+<!-- Category icons -->
+<div class="category-row">
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    <span>FACULTY</span>
+  </a>
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+    <span>RA/IPDF</span>
+  </a>
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    <span>STAFF</span>
+  </a>
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+    <span>RESEARCH SCHOLARS</span>
+  </a>
+  <a href="#" class="cat-item">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+    <span>ADVISORS</span>
+  </a>
+  <a href="#" class="cat-item active">
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2zm0 3.28L9.74 9.97l-5.18.75 3.75 3.65-.89 5.16L12 16.9l4.58 2.63-.89-5.16 3.75-3.65-5.18-.75L12 5.28z"/></svg>
+    <span>FORMER ASSOCIATES</span>
+  </a>
+</div>
+
+<!-- Sub-tabs -->
+<div class="sub-tabs">
+  <button class="sub-tab active">Former Associate</button>
+  <button class="sub-tab">Former Faculty</button>
+  <button class="sub-tab">Former Staff</button>
+</div>
+
+<!-- FORMER DIRECTOR -->
+<div class="section-title">FORMER DIRECTOR</div>
+<div class="profile-grid single">
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF P Seshu</div>
+      <div class="role">Founding Director</div>
+      <div class="period">From 07 March 2017 to 30 September 2022</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORMER DEANS -->
+<div class="section-title">FORMER DEANS</div>
+<div class="profile-grid">
+
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF S V Prabhu</div>
+      <div class="role">Former Dean (Academic Programs) &amp; (Students Welfare)</div>
+      <div class="period">From 01 May 2016 to 30 April 2018</div>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF Shridhar Laxman Bapat</div>
+      <div class="role">Former Dean (Academic Programs)</div>
+      <div class="period">From 01 December 2020 To 5 December 2022</div>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF Bhalchandra Laxmanrao Tembe</div>
+      <div class="role">Former Dean (Students Welfare)</div>
+      <div class="period">From 28 August 2019 To 21 July 2023</div>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF Nagesh R Iyer</div>
+      <div class="role">Former Dean (Infrastructure, Planning &amp; Support)</div>
+      <div class="period">From 07 September 2017 to 07 January 2024</div>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF S R Mahadeva Prasanna</div>
+      <div class="role">Former Dean (Faculty Welfare)</div>
+      <div class="period">- From 03 March 2020 to 30 April 2024</div>
+      <div class="role-extra">Former Dean (Research &amp; Development)</div>
+      <div class="period">- From 24 July 2017 to 20 March 2023</div>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF Rajesh Mahanand Hegde</div>
+      <div class="role">Former Dean (Research &amp; Development)</div>
+      <div class="period">- From 23 March 2023 to 10 May 2024</div>
+      <div class="role-extra">Former Dean (Outreach)</div>
+      <div class="period">- From 18 July 2023 to 18 January 2024</div>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF Pradeep Gururaj Yammiyavar</div>
+      <div class="role">Former Dean (Students Welfare)</div>
+      <div class="period">From 21 July 2023 to 10 May 2024</div>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">PROF Narayan S Punekar</div>
+      <div class="role">Former Dean (Academic Programs)</div>
+      <div class="period">- -</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FORMER REGISTRAR -->
+<div class="section-title">FORMER REGISTRAR</div>
+<div class="profile-grid single">
+  <div class="profile-card">
+    <div class="placeholder-img">Photo</div>
+    <div class="profile-info">
+      <div class="name">Dr S Basavarajappa</div>
+      <div class="role">Former Registrar</div>
+      <div class="period">From 01 January 2021 to 03 January 2024</div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="address">
+    <p>
+      INDIAN INSTITUTE OF TECHNOLOGY DHARWAD<br>
+      PERMANENT CAMPUS<br>
+      CHIKKAMALLIGAWAD<br>
+      DHARWAD - 580 011<br>
+      KARNATAKA<br>
+      BHARATA (INDIA)
+    </p>
+    <p style="margin-top:10px;">✉ pro@iitdh.ac.in</p>
+    <p>📞 Contact Us</p>
+  </div>
+
+  <div>
+    <h4>ACADEMICS</h4>
+    <ul>
+      <li><a href="#">Announcements</a></li>
+      <li><a href="#">Departments</a></li>
+      <li><a href="#">Programs</a></li>
+      <li><a href="#">B.Tech Admissions</a></li>
+      <li><a href="#">BS Admissions</a></li>
+      <li><a href="#">M.Sc. Admissions</a></li>
+      <li><a href="#">M.Tech Admissions</a></li>
+      <li><a href="#">M.Tech (R) Admissions</a></li>
+      <li><a href="#">Ph.D Admissions</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>RESEARCH</h4>
+    <ul>
+      <li><a href="#">Consultancy Projects</a></li>
+      <li><a href="#">IRINS</a></li>
+      <li><a href="#">Project Vacancies</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">Sponsored Projects</a></li>
+      <li><a href="#">R&amp;D Website</a></li>
+      <li><a href="#">Incubation Center</a></li>
+      <li><a href="#">SCIF</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>PEOPLE</h4>
+    <ul>
+      <li><a href="#">Administration</a></li>
+      <li><a href="#">Faculty</a></li>
+      <li><a href="#">RA/iPDF</a></li>
+      <li><a href="#">Research Scholars</a></li>
+      <li><a href="#">Staff</a></li>
+      <li><a href="#">Students</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>QUICK ACCESS</h4>
+    <ul>
+      <li><a href="#">About DHARWAD</a></li>
+      <li><a href="#">Anti-Ragging Cell</a></li>
+      <li><a href="#">Chief Vigilance Officer</a></li>
+      <li><a href="#">Counselling Center</a></li>
+      <li><a href="#">Creche Facility</a></li>
+      <li><a href="#">CSR Contribution</a></li>
+      <li><a href="#">Doctors' Availability</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Grievance Redressal</a></li>
+      <li><a href="#">ICC</a></li>
+      <li><a href="#">Intranet</a></li>
+      <li><a href="#">Moodle</a></li>
+      <li><a href="#">Old Website</a></li>
+      <li><a href="#">R&amp;D Website</a></li>
+      <li><a href="#">RTI</a></li>
+      <li><a href="#">Equal Opportunity Cell</a></li>
+      <li><a href="#">Tenders</a></li>
+      <li><a href="#">Transport</a></li>
+      <li><a href="#">Videos</a></li>
+      <li><a href="#">VPN Access</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom"><a href="#">IPS Website</a></div>
+
+</body>
+</html>

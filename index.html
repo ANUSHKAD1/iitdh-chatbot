@@ -1,0 +1,3102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indian Institute of Technology Dharwad</title>
+  <link rel="icon" type="image/jpeg" href="images/favicon.jpeg?v=2">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Chatbot widget: fonts + stylesheet -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <link rel="stylesheet" href="style-c.css" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: #222;
+      background: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ── Colours ── */
+    :root {
+      --purple: #8E2E97;
+      --purple-dark: #74257D;
+      --purple-light: #A94DB3;
+      --gold: #F6B21A;
+
+      --white: #fff;
+      --grey-bg: #f5f5f5;
+      --text: #222;
+      --muted: #555;
+      --border: #e0e0e0;
+    }
+
+    /* ══════════════════════════════════
+       TOP NAV BAR (purple, thin)
+    ══════════════════════════════════ */
+    .top-nav {
+      background: var(--purple);
+      padding: 0;
+      position: relative;
+      z-index: 200;
+    }
+
+    .top-nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .top-nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .top-nav-links a {
+      color: #fff;
+      font-size: 0.82rem;
+      padding: 10px 14px;
+      display: block;
+      transition: background 0.18s;
+      font-weight: 400;
+    }
+
+    /* ---------- Dropdown ---------- */
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown>a {
+      display: block;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 190px;
+      background: #fff;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, .2);
+      display: none;
+      z-index: 9999;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: #333 !important;
+      background: #fff;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
+      transition: .25s;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+      color: var(--purple) !important;
+      padding-left: 22px;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .top-nav-links a:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .top-nav-links .home-icon {
+      padding: 10px 12px;
+      font-size: 0.95rem;
+    }
+
+    .top-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .top-nav-search {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+      padding: 4px 10px;
+      gap: 6px;
+      margin-right: 10px;
+    }
+
+    .top-nav-search input {
+      background: none;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.8rem;
+      width: 140px;
+    }
+
+    .top-nav-search input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .top-nav-search i {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.8rem;
+    }
+
+    .myiit-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 0.82rem;
+      padding: 6px 12px;
+      border-radius: 3px;
+      border: none;
+      transition: background 0.18s;
+      margin-right: 10px;
+    }
+
+    .myiit-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .font-size-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .font-size-ctrl button {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.8rem;
+      padding: 4px 6px;
+      transition: color 0.18s;
+    }
+
+    .font-size-ctrl button:hover {
+      color: var(--gold);
+    }
+
+    /* ══════════════════════════════════
+       MAIN HEADER (white, with logo + main nav)
+    ══════════════════════════════════ */
+    .main-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 70px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    }
+
+    .main-header-inner {
+      max-width: 1400px;
+      height: 70px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .site-logo {
+      width: 320px;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      width: 300px;
+      height: auto;
+      display: block;
+      width: 100%;
+      max-width: 620px;
+      height: auto;
+      display: block;
+    }
+
+
+    .logo-emblem {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 3px solid var(--gold);
+    }
+
+    .logo-emblem span {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .logo-text-block {
+      line-height: 1.2;
+    }
+
+    .logo-text-block .kannada {
+      font-size: 0.82rem;
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    .logo-text-block .hindi {
+      font-size: 0.88rem;
+      color: var(--purple);
+      font-weight: 700;
+    }
+
+    .logo-text-block .english {
+      font-size: 0.72rem;
+      color: #333;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    /* =====================================================
+   IIT DHARWAD MEGA MENU
+===================================================== */
+
+    .main-nav {
+      width: 46%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .main-nav a {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .main-nav a:hover {
+      color: var(--purple);
+    }
+
+    .main-nav li a {
+      white-space: nowrap;
+    }
+
+    .main-menu-item {
+      position: relative;
+    }
+
+    .main-menu-item>a {
+      display: block;
+      padding: 28px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      text-transform: uppercase;
+      transition: .3s;
+    }
+
+    .main-menu-item>a:hover {
+      color: var(--purple);
+    }
+
+    /* Mega Menu */
+
+    .mega-menu {
+
+      position: absolute;
+      top: 100%;
+      left: 0;
+
+      width: 340px;
+
+      background: #fff;
+
+      border-top: 4px solid var(--gold);
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform: translateY(10px);
+
+      transition: .3s;
+
+      z-index: 99999;
+
+    }
+
+    .main-menu-item:hover>.mega-menu {
+
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+
+    }
+
+    .mega-menu ul {
+      list-style: none;
+    }
+
+    .mega-menu li {
+
+      position: relative;
+
+    }
+
+    .mega-menu li>a {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      padding: 13px 18px;
+
+      color: #333;
+
+      font-size: 14px;
+
+      border-bottom: 1px solid #ececec;
+
+      transition: .25s;
+
+    }
+
+    .mega-menu li>a:hover {
+
+      background: #f7f7f7;
+
+      color: var(--purple);
+
+    }
+
+    /* Arrow */
+
+    .has-sub>a::after {
+
+      content: "▶";
+
+      font-size: 10px;
+
+    }
+
+    /* Sub Menu */
+
+    .sub-menu {
+
+      position: absolute;
+
+      left: 100%;
+
+      top: 0;
+
+      width: 320px;
+
+      background: #fff;
+
+      border-top: 4px solid var(--gold);
+
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transform: translateX(10px);
+
+      transition: .25s;
+
+    }
+
+    .has-sub:hover>.sub-menu {
+
+      opacity: 1;
+
+      visibility: visible;
+
+      transform: translateX(0);
+
+    }
+
+    .sub-menu li a {
+
+      padding: 12px 18px;
+
+      display: block;
+
+      border-bottom: 1px solid #ececec;
+
+      color: #333;
+
+    }
+
+    .sub-menu li a:hover {
+
+      background: #f7f7f7;
+
+      color: var(--purple);
+
+    }
+
+    .main-nav a {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #333;
+      padding: 10px 22px;
+      display: block;
+      letter-spacing: 0.5px;
+      transition: color 0.18s;
+      position: relative;
+    }
+
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 22px;
+      right: 22px;
+      height: 3px;
+      background: var(--purple);
+      transform: scaleX(0);
+      transition: transform 0.18s;
+    }
+
+    .main-nav a:hover {
+      color: var(--purple);
+    }
+
+    .main-nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--purple);
+    }
+
+    /* ══════════════════════════════════
+       HERO SLIDER
+    ══════════════════════════════════ */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      height: 480px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+    }
+
+    .slide-text {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      text-align: center;
+      padding: 0 40px;
+      max-width: 900px;
+    }
+
+    .slide-text h2 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+      line-height: 1.15;
+    }
+
+    .slide-text p {
+      font-size: 1.1rem;
+      margin-top: 12px;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+      opacity: 0.9;
+    }
+
+    .slide-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Overlay */
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.18);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+    }
+
+    /* Text */
+    .slide-text {
+      text-align: center;
+      color: #fff;
+    }
+
+    .slide-text .welcome {
+      font-size: 64px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, .6);
+
+      animation: fadeDown 1.2s ease;
+    }
+
+    .slide-text .iit {
+      font-size: 92px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, .7);
+
+      animation: zoomUp 1.4s ease;
+    }
+
+    /* Animation */
+
+    @keyframes fadeDown {
+
+      from {
+        opacity: 0;
+        transform: translateY(-60px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+    @keyframes zoomUp {
+
+      from {
+        opacity: 0;
+        transform: scale(.6);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+    /* Arrows */
+    .hero-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.35);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s;
+    }
+
+    .hero-btn:hover {
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+
+    .hero-btn.prev {
+      left: 16px;
+    }
+
+    .hero-btn.next {
+      right: 16px;
+    }
+
+    /* Dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .hero-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      background: transparent;
+      transition: all 0.2s;
+    }
+
+    .hero-dots button.active {
+      background: #fff;
+      border-color: #fff;
+      transform: scale(1.3);
+    }
+
+    /* Social floating icons (right side) */
+    .social-float {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      z-index: 500;
+    }
+
+    .social-float a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      color: #fff;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+
+    .social-float a.tw {
+      background: #000;
+    }
+
+    .social-float a.yt {
+      background: #ff0000;
+    }
+
+    .social-float a.li {
+      background: #0077b5;
+    }
+
+    .social-float a:hover {
+      opacity: 0.85;
+    }
+
+    /* ══════════════════════════════════
+       4 ICON TILES (PEOPLE / DEPARTMENTS / FACILITIES / NEWS)
+    ══════════════════════════════════ */
+    .icon-tiles {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 5;
+    }
+
+    .icon-tile {
+      background: var(--purple);
+      color: #fff;
+      text-align: center;
+      padding: 22px 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+      text-decoration: none;
+      display: block;
+    }
+
+    .icon-tile:last-child {
+      border-right: none;
+    }
+
+    .icon-tile:hover {
+      background: var(--purple-dark);
+    }
+
+    .icon-tile i {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 8px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .icon-tile span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════════
+       3-COL MID SECTION (About | YouTube | Announcements)
+    ══════════════════════════════════ */
+    .mid-section {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* About card */
+    .about-card .about-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #2c1a4a, var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 3rem;
+      margin-bottom: 14px;
+    }
+
+    .about-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .about-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .find-more-btn {
+      display: inline-block;
+      border: 2px solid #333;
+      padding: 8px 22px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #333;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+
+    .find-more-btn:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    /* ====================== YouTube Card ====================== */
+
+    .yt-card {
+      background: #fff;
+    }
+
+    .yt-thumbnail {
+      position: relative;
+      width: 100%;
+      height: 290px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .yt-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 52px;
+      background: #ff0000;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 34px;
+      transition: .3s;
+    }
+
+    .play-btn:hover {
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+
+    .yt-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #222;
+    }
+
+    .yt-card p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 25px;
+    }
+
+    .yt-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border: 2px solid #222;
+      border-radius: 35px;
+      color: #222;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: .3s;
+    }
+
+    .yt-btn:hover {
+      background: #ff0000;
+      border-color: #ff0000;
+      color: #fff;
+    }
+
+    /* Announcements */
+    .announcements-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ann-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    .ann-controls button {
+      background: #fff;
+      border: 1px solid var(--border);
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      transition: background 0.18s;
+    }
+
+    .ann-controls button:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    .view-past-btn {
+      display: inline-block;
+      border: 1px solid #333;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #333;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
+      transition: all 0.2s;
+    }
+
+    .view-past-btn:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    .ann-list {
+      max-height: 340px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .ann-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .ann-list::-webkit-scrollbar-thumb {
+      background: var(--purple);
+      border-radius: 2px;
+    }
+
+    .ann-item {
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+    }
+
+    .ann-item a {
+      font-size: 0.84rem;
+      color: var(--purple);
+      line-height: 1.5;
+      display: block;
+      transition: color 0.18s;
+    }
+
+    .ann-item a:hover {
+      color: var(--purple-dark);
+      text-decoration: underline;
+    }
+
+    .ann-item .ann-new {
+      display: inline-block;
+      background: #e53935;
+      color: #fff;
+      font-size: 0.65rem;
+      padding: 1px 5px;
+      border-radius: 2px;
+      margin-left: 6px;
+      font-weight: 700;
+      vertical-align: middle;
+    }
+
+    /* ══════════════════════════════════
+       SECTION WRAPPER (full-width sections)
+    ══════════════════════════════════ */
+    .page-section {
+      max-width: 1400px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    .view-more-btn {
+      border: 1px solid #333;
+      padding: 7px 18px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #333;
+      letter-spacing: 0.3px;
+      transition: all 0.2s;
+    }
+
+    .view-more-btn:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    /* ══════════════════════════════════
+       NEWS / EVENTS / HIGHLIGHTS — 3-card carousels
+    ══════════════════════════════════ */
+    .cards-carousel {
+      position: relative;
+    }
+
+    .cards-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .news-card {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .news-card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .news-card .card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a0c2e, var(--purple));
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 2.5rem;
+      position: relative;
+    }
+
+    .news-card .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-card .card-body {
+      padding: 14px 16px;
+    }
+
+    .news-card .card-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .news-card .card-meta {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .news-card .card-meta i {
+      color: var(--purple);
+    }
+
+    /* Carousel prev/next */
+    .carousel-btn {
+      position: absolute;
+      top: 30%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      transition: background 0.2s;
+    }
+
+    .carousel-btn:hover {
+      background: var(--purple);
+    }
+
+    .carousel-btn.prev {
+      left: -18px;
+    }
+
+    .carousel-btn.next {
+      right: -18px;
+    }
+
+    /* ══════════════════════════════════
+       UPCOMING EVENTS (2-col with date + venue)
+    ══════════════════════════════════ */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .event-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .15);
+      transition: .3s;
+    }
+
+    .event-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .event-card .card-img {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+    }
+
+    .event-card .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .event-card .card-body {
+      padding: 18px;
+    }
+
+    .event-card .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    .event-meta i {
+      color: #777;
+      width: 20px;
+    }
+
+    /* ══════════════════════════════════
+       STATS GRID (bordered boxes, 2 rows of 8)
+    ══════════════════════════════════ */
+    .stats-section {
+      max-width: 1400px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 0;
+      margin-bottom: 16px;
+    }
+
+    .stat-box {
+      border: 1px solid var(--border);
+      padding: 20px 10px;
+      text-align: center;
+      margin: -1px 0 0 -1px;
+    }
+
+    .stat-box i {
+      font-size: 1.6rem;
+      color: var(--purple);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-box .num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--purple);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-box .lbl {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    /* ══════════════════════════════════
+       GREEN CAMPUS BANNER (full-width with overlay text)
+    ══════════════════════════════════ */
+    .green-banner {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #b0bec5, #90a4ae);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .green-banner .banner-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(176, 190, 197, 0.5) 0%, rgba(144, 164, 174, 0.7) 100%);
+    }
+
+    .green-banner .banner-content {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.82);
+      padding: 40px 60px;
+      max-width: 740px;
+      text-align: center;
+    }
+
+    .green-banner .banner-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #333;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .green-banner .banner-content p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .view-more-outline {
+      display: inline-block;
+      border: 2px solid #333;
+      padding: 9px 28px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #333;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+
+    .view-more-outline:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    /* ══════════════════════════════════
+       PLACEMENT REPORT
+    ══════════════════════════════════ */
+
+    .placement-section {
+      background: #fcf7ff;
+      padding: 70px 20px;
+    }
+
+    .placement-inner {
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .placement-inner h2 {
+      text-align: center;
+      font-size: 58px;
+      color: var(--purple);
+      margin-bottom: 40px;
+      font-weight: 800;
+    }
+
+    .placement-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .placement-card {
+      border: 4px solid var(--purple);
+      border-radius: 30px;
+      background: #fff;
+      padding: 20px;
+    }
+
+    .reg-title {
+      text-align: center;
+      color: #c47b00;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .placement-content {
+      position: relative;
+      height: 360px;
+    }
+
+    .circle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 310px;
+      height: 310px;
+    }
+
+    .quad {
+      position: absolute;
+      width: 145px;
+      height: 145px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .purple {
+      top: 0;
+      left: 0;
+      background: var(--purple-dark);
+      border-radius: 100% 0 0 0;
+    }
+
+    .green {
+      top: 0;
+      right: 0;
+      background: #1f951b;
+      border-radius: 0 100% 0 0;
+    }
+
+    .blue {
+      bottom: 0;
+      left: 0;
+      background: #124ea8;
+      border-radius: 0 0 0 100%;
+    }
+
+    .orange {
+      bottom: 0;
+      right: 0;
+      background: #ef6500;
+      border-radius: 0 0 100% 0;
+    }
+
+    .center-text {
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      background: #fff;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: #ff3b30;
+      box-shadow: 0 0 0 8px #f5f5f5;
+    }
+
+    .left-label,
+    .right-label {
+      position: absolute;
+      width: 180px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #114b93;
+      line-height: 1.4;
+    }
+
+    .left-label.top {
+      top: 45px;
+      left: 0;
+      text-align: right;
+    }
+
+    .left-label.bottom {
+      bottom: 25px;
+      left: 0;
+      text-align: right;
+    }
+
+    .right-label.top {
+      top: 45px;
+      right: 0;
+    }
+
+    .right-label.bottom {
+      bottom: 25px;
+      right: 0;
+    }
+
+    /* Responsive */
+
+    @media(max-width:1000px) {
+
+      .placement-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .placement-inner h2 {
+        font-size: 38px;
+      }
+
+    }
+
+    /* ══════════════════════════════════
+       FOOTER (purple, 5-col)
+    ══════════════════════════════════ */
+    .site-footer {
+      background: var(--purple);
+      color: rgba(255, 255, 255, 0.85);
+      padding: 44px 0 0;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+      gap: 36px;
+      padding-bottom: 36px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #fff;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-address p {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .footer-address .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 12px;
+      transition: color 0.18s;
+    }
+
+    .footer-address .contact-link:hover {
+      color: var(--gold);
+    }
+
+    .footer-col ul li {
+      margin-bottom: 9px;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.8);
+      transition: color 0.18s;
+      display: block;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--gold);
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      background: rgba(0, 0, 0, 0.25);
+      text-align: center;
+      padding: 14px 24px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* ══════════════════════════════════
+       SCROLL TO TOP
+    ══════════════════════════════════ */
+    #back-top {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 4px;
+      font-size: 1rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 400;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background 0.2s;
+    }
+
+    #back-top.show {
+      display: flex;
+    }
+
+    #back-top:hover {
+      background: var(--purple-dark);
+    }
+
+    /* ══════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .stats-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .mid-section {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-track {
+        grid-template-columns: 1fr;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .placement-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .icon-tiles {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-nav-links a:not(.home-icon) {
+        display: none;
+      }
+
+      .main-nav {
+        display: none;
+      }
+
+      .main-nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        z-index: 999;
+      }
+
+      .main-nav.open a {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero {
+        height: 260px;
+      }
+
+      .slide-text h2 {
+        font-size: 1.8rem;
+      }
+
+      .stats-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .green-banner .banner-content {
+        padding: 24px 20px;
+      }
+
+      .donut-wrap {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .icon-tiles {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .search-highlight {
+      outline: 3px solid var(--gold);
+      background: #fff7e0;
+      transition: background 0.3s;
+    }
+
+    .search-no-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      color: #c0392b;
+      font-size: 0.78rem;
+      padding: 6px 12px;
+      border-radius: 3px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+      white-space: nowrap;
+      z-index: 300;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+     TOP NAV BAR
+═══════════════════════════════════════ -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div class="top-nav-links">
+        <a href="#" class="home-icon"><i class="fa fa-home"></i></a>
+        <div class="dropdown">
+          <a href="#">About</a>
+
+          <div class="dropdown-menu">
+            <a href="#">IIT Dharwad</a>
+            <a href="#">Campus</a>
+            <a href="#">NIRF</a>
+            <a href="#">Reports</a>
+            <a href="#">Contact Us</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="#">Leadership</a>
+
+          <div class="dropdown-menu">
+            <a href="#">Board of Governors</a>
+            <a href="#">Director</a>
+            <a href="#">Senate</a>
+            <a href="#">Administration</a>
+            <a href="#">Deans</a>
+            <a href="#">Heads of Departments</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="#">Recruitment</a>
+
+          <div class="dropdown-menu">
+            <a href="#">Faculty Recruitment</a>
+            <a href="#">Staff Recruitment</a>
+            <a href="#">Project Positions</a>
+            <a href="#">Apply Online</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="#">Notifications</a>
+
+          <div class="dropdown-menu">
+            <a href="#">Latest Notifications</a>
+            <a href="#">Circulars</a>
+            <a href="#">Office Orders</a>
+            <a href="#">Tender Notices</a>
+            <a href="#">Downloads</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="#">Alumni &amp; Wellwishers</a>
+
+          <div class="dropdown-menu">
+            <a href="#">Alumni Association</a>
+            <a href="#">Alumni Registration</a>
+            <a href="#">Donate</a>
+            <a href="#">Distinguished Alumni</a>
+            <a href="#">Events</a>
+            <a href="#">Newsletters</a>
+          </div>
+        </div>
+        <a href="#">NIRF</a>
+      </div>
+      <div class="top-nav-right">
+        <div class="top-nav-search">
+          <i class="fa fa-search"></i>
+          <input type="text" placeholder="Search..." />
+        </div>
+        <a href="#" class="myiit-btn">
+          <i class="fa fa-user-circle"></i> myIIT
+        </a>
+        <div class="font-size-ctrl">
+          <button title="Decrease font size">A-</button>
+          <button title="Normal font size">A</button>
+          <button title="Increase font size">A+</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+     MAIN HEADER
+═══════════════════════════════════════ -->
+  <header class="main-header">
+    <div class="main-header-inner">
+      <a href="index_1.html" class="site-logo">
+
+        <img src="images/logo.png" alt="IIT Dharwad Logo" class="header-logo">
+
+      </a>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><i class="fa fa-bars"></i></button>
+      <nav class="main-nav" id="main-nav">
+
+        <!-- ================= ACADEMICS ================= -->
+
+        <div class="main-menu-item">
+
+          <a href="#">ACADEMICS</a>
+
+          <div class="mega-menu">
+
+            <ul>
+
+              <li><a href="#">Open House 2026</a></li>
+
+              <li class="has-sub">
+
+                <a href="#">Centres</a>
+
+                <div class="sub-menu">
+
+                  <ul>
+
+                    <li><a href="#">Centre of Excellence – ACE</a></li>
+                    <li><a href="#">Centre of Excellence – IKS</a></li>
+
+                  </ul>
+
+                </div>
+
+              </li>
+
+              <li class="has-sub">
+
+                <a href="#">Departments</a>
+
+                <div class="sub-menu">
+
+                  <ul>
+
+                    <li><a href="#">Biosciences & Bioengineering</a></li>
+                    <li><a href="#">Chemical Engineering</a></li>
+                    <li><a href="#">Chemistry</a></li>
+                    <li><a href="#">Civil & Infrastructure Engineering</a></li>
+                    <li><a href="#">Computer Science & Engineering</a></li>
+                    <li><a href="#">Electrical, Electronics & Communication Engineering</a></li>
+                    <li><a href="#">Humanities, Economics, Arts & Rural Technologies</a></li>
+                    <li><a href="#">Mathematics</a></li>
+                    <li><a href="#">Mechanical, Materials & Aerospace Engineering</a></li>
+                    <li><a href="#">Physics</a></li>
+
+                  </ul>
+
+                </div>
+
+              </li>
+
+              <li class="has-sub">
+
+                <a href="#">Programs</a>
+
+                <div class="sub-menu">
+
+                  <ul>
+
+                    <li><a href="#">B.Tech</a></li>
+                    <li><a href="#">BS-MS</a></li>
+                    <li><a href="#">M.Sc</a></li>
+                    <li><a href="#">M.Tech</a></li>
+                    <li><a href="#">Executive M.Tech</a></li>
+                    <li><a href="#">M.Tech by Research</a></li>
+                    <li><a href="#">Ph.D</a></li>
+
+                  </ul>
+
+                </div>
+
+              </li>
+
+              <li><a href="#">Curriculum</a></li>
+
+              <li class="has-sub">
+
+                <a href="#">Announcements</a>
+
+                <div class="sub-menu">
+
+                  <ul>
+
+                    <li><a href="#">Academic Calendar</a></li>
+                    <li><a href="#">Examinations</a></li>
+                    <li><a href="#">Fee Circular</a></li>
+                    <li><a href="#">Holiday List</a></li>
+                    <li><a href="#">Time Table</a></li>
+
+                  </ul>
+
+                </div>
+
+              </li>
+
+              <li><a href="#">Faculty Advisors</a></li>
+
+              <li><a href="#">Forms</a></li>
+
+              <li><a href="#">Knowledge Resource Centre</a></li>
+
+              <li><a href="#">Scholarships</a></li>
+
+              <li class="has-sub">
+
+                <a href="#">Fellowships</a>
+
+                <div class="sub-menu">
+
+                  <ul>
+
+                    <li><a href="#">PMRF Scheme</a></li>
+                    <li><a href="#">Visvesvaraya PhD Scheme</a></li>
+
+                  </ul>
+
+                </div>
+
+              </li>
+
+              <li><a href="#">Academic Internship</a></li>
+
+              <li><a href="#">Academic Suo Moto Disclosure</a></li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+        <!-- ================= ADMISSIONS ================= -->
+
+        <div class="main-menu-item">
+
+          <a href="#">ADMISSIONS</a>
+
+          <div class="mega-menu">
+
+            <ul>
+
+              <li><a href="#">B.Tech Admissions</a></li>
+
+              <li><a href="#">BS Admissions</a></li>
+
+              <li><a href="#">M.Sc Admissions</a></li>
+
+              <li><a href="#">M.Tech Admissions</a></li>
+
+              <li><a href="#">M.Tech by Research</a></li>
+
+              <li><a href="#">Ph.D Admissions</a></li>
+
+              <li><a href="#">International Admissions</a></li>
+
+              <li><a href="#">Admission Cutoff History</a></li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+        <!-- ================= CAMPUS LIFE ================= -->
+
+        <div class="main-menu-item">
+
+          <a href="#">CAMPUS LIFE</a>
+
+          <div class="mega-menu">
+
+            <ul>
+
+              <li><a href="#">Career Development Cell</a></li>
+
+              <li><a href="#">Students Welfare</a></li>
+
+              <li class="has-sub">
+
+                <a href="#">Student Life</a>
+
+                <div class="sub-menu">
+
+                  <ul>
+
+                    <li><a href="#">Clubs</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Innovation Cell</a></li>
+                    <li><a href="#">NSS</a></li>
+                    <li><a href="#">Student Mentorship Program</a></li>
+
+                  </ul>
+
+                </div>
+
+              </li>
+
+              <li class="has-sub">
+
+                <a href="#">Sports</a>
+
+                <div class="sub-menu">
+
+                  <ul>
+
+                    <li><a href="#">Sports Facilities</a></li>
+                    <li><a href="#">Achievements</a></li>
+                    <li><a href="#">Sports Council</a></li>
+
+                  </ul>
+
+                </div>
+
+              </li>
+
+              <li><a href="#">Gallery</a></li>
+
+              <li><a href="#">Student Highlights</a></li>
+
+              <li><a href="#">Smart Mess</a></li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+        <!-- ================= RESEARCH ================= -->
+
+        <div class="main-menu-item">
+
+          <a href="#">RESEARCH</a>
+
+          <div class="mega-menu">
+
+            <ul>
+
+              <li><a href="#">Research Areas</a></li>
+
+              <li><a href="#">Research Facilities</a></li>
+
+              <li><a href="#">Sponsored Projects</a></li>
+
+              <li><a href="#">Consultancy Projects</a></li>
+
+              <li><a href="#">Publications</a></li>
+
+              <li><a href="#">Patents</a></li>
+
+              <li><a href="#">Innovation Centre</a></li>
+
+              <li><a href="#">R&D Website</a></li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+     HERO SLIDER
+═══════════════════════════════════════ -->
+  <section class="hero" id="hero">
+
+    <div class="slide active">
+      <img src="images/banner1.jpg" class="slide-image">
+      <div class="slide-overlay">
+        <div class="slide-text">
+          <h2 class="welcome">Welcome to</h2>
+          <h1 class="iit">IIT DHARWAD</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="images/banner2.png" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner3.png" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner4.png" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner5.png" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner6.jpg" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner7.jpg" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner8.jpg" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner9.jpg" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner10.png" class="slide-image">
+    </div>
+
+    <div class="slide">
+      <img src="images/banner11.jpg" class="slide-image">
+    </div>
+
+    <button class="hero-btn prev" id="hero-prev">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <button class="hero-btn next" id="hero-next">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+
+    <div class="hero-dots" id="hero-dots"></div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════
+     4 ICON TILES
+═══════════════════════════════════════ -->
+  <div class="icon-tiles">
+    <a href="faculty.html" class="icon-tile">
+      <i class="fa fa-user-friends"></i>
+      <span>People</span>
+    </a>
+    <a href="departments.html" class="icon-tile">
+      <i class="fa fa-th-large"></i>
+      <span>Departments</span>
+    </a>
+    <a href="facilities.html" class="icon-tile">
+      <i class="fa fa-flask"></i>
+      <span>Facilities</span>
+    </a>
+    <a href="news.html" class="icon-tile">
+      <i class="fa fa-newspaper"></i>
+      <span>News</span>
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+     3-COL MID: About | YouTube | Announcements
+═══════════════════════════════════════ -->
+  <div class="mid-section">
+
+    <!-- About -->
+    <div class="about-card">
+      <div class="about-img">
+        <img src="images/campus5.jpg" alt="About IIT Dharwad">
+      </div>
+
+      <h3>About IIT Dharwad</h3>
+
+      <p>
+        Indian Institute of Technology DHARWAD (IITDH) is one of the third
+        Generation (3-G) IITs, which were established by the Ministry of
+        Education (MoE), Government of India....
+      </p>
+
+      <!-- Opens about.html -->
+      <a href="about.html" class="find-more-btn">
+        Find Out More
+      </a>
+    </div>
+
+    <!-- YouTube Campus Tour -->
+    <div class="yt-card">
+
+      <div class="yt-thumbnail">
+
+        <img src="images/campus-tour.png" alt="IIT Dharwad Campus Tour">
+
+        <a href="https://www.youtube.com/@IITDharwadOfficialChannel" target="_blank" class="play-btn">
+          <i class="fab fa-youtube"></i>
+        </a>
+
+      </div>
+
+      <h3>IIT DHARWAD CAMPUS TOUR</h3>
+
+      <p>
+        We are excited to share the Campus tour of IIT DHARWAD on YouTube!
+      </p>
+
+      <a href="https://www.youtube.com/@IITDharwadOfficialChannel" target="_blank" class="yt-btn">
+        VISIT IIT DHARWAD YOUTUBE CHANNEL
+      </a>
+
+    </div>
+
+    <!-- Announcements -->
+    <div class="announcements-card">
+      <h3>
+        Announcements
+        <div class="ann-controls">
+          <button title="Previous"><i class="fa fa-chevron-up"></i></button>
+          <button title="Next"><i class="fa fa-chevron-down"></i></button>
+        </div>
+      </h3>
+      <a href="#" class="view-past-btn">View Past Announcements</a>
+      <div class="ann-list">
+        <div class="ann-item">
+          <a href="pdfs/Declaration of results.pdf" target="_blank">
+            Declaration of Result for the post of Electrical Engineer [on contract]
+          </a>
+        </div>
+        <div class="ann-item"><a href="images/dharti.jpeg">Inviting applications for key positions under the IIT dhArti
+            Foundation,
+            fostering innovation and entrepreneurship in collaboration with K-Tech and Startup Karnataka | For more
+            details | (Apply Now) <span class="ann-new">NEW</span></a></div>
+        <div class="ann-item"><a href="pdfs/selection.pdf" target="_blank">Selection Process for the post of Junior
+            Superintendent</a></div>
+        <div class="ann-item"><a
+            href="https://www.santannapisa.it/en/internazionale/nuovo-bando-erasmus-extra-ue-dicembre-2024">The call for
+            Teaching/Training and Traineeship activities application request
+            call under KA 171 International Credit Mobility. New Call Erasmus+ extra UE – Scuola Superiore Sant'Anna |
+            Deadline for Submission: May 5, 2025</a></div>
+        <div class="ann-item"><a href="#">Call Letter-cum-Admit card for the post of Junior Superintendent [Security]
+            <span class="ann-new">NEW</span></a></div>
+        <div class="ann-item"><a href="#">Ph.D. Admissions — Autumn Semester 2026-27 (Applications Open)</a></div>
+        <div class="ann-item"><a href="#">Regular Faculty Recruitment — Rolling Advertisement <span
+              class="ann-new">NEW</span></a></div>
+        <div class="ann-item"><a href="#">B.S. in Biology and B.S. in Chemistry — CUET-UG 2026, Deadline: 12 July
+            2026</a></div>
+        <div class="ann-item"><a href="#">7th Convocation of IIT Dharwad scheduled for 18 July 2026</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+     LATEST NEWS
+═══════════════════════════════════════ -->
+  <div class="section-header">
+    <h2>Latest News</h2>
+    <a href="#" class="view-more-btn">View More News</a>
+  </div>
+
+  <div class="cards-carousel">
+
+    <button class="carousel-btn prev">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <div class="cards-track" id="news-track">
+
+      <!-- Card 1 -->
+      <div class="news-card">
+        <div class="card-img">
+          <img src="images/news1.jpEg" alt="PAN IIT Conference">
+        </div>
+
+        <div class="card-body">
+          <div class="card-title">
+            IIT DHARWAD at PAN IIT2026 Global Conference
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="news-card">
+        <div class="card-img">
+          <img src="images/news2.PNG" alt="Kendriya Vidyalaya">
+        </div>
+
+        <div class="card-body">
+          <div class="card-title">
+            Kendriya Vidyalaya Inaugurated at IIT DHARWAD Campus
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="news-card">
+        <div class="card-img">
+          <img src="images/news3.png" alt="Admissions">
+        </div>
+
+        <div class="card-body">
+          <div class="card-title">
+            Kendriya Vidyalaya IIT DHARWAD – Admissions Open for 2026–27
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-btn next">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+
+  </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+     UPCOMING EVENTS
+═══════════════════════════════════════ -->
+  <div class="page-section">
+
+    <div class="section-header">
+      <h2>Upcoming Events</h2>
+      <a href="#" class="view-more-btn">View Past Events</a>
+    </div>
+
+    <div class="events-grid">
+
+      <!-- Event 1 -->
+      <div class="event-card">
+
+        <div class="card-img">
+          <img src="images/event1.jpg" alt="7th Convocation">
+        </div>
+
+        <div class="card-body">
+
+          <div class="card-title">
+            7th Convocation
+          </div>
+
+          <div class="event-meta">
+
+            <span>
+              <i class="fa fa-calendar"></i>
+              18/07/2026 03:00 PM - 18/07/2026 06:00 PM
+            </span>
+
+            <span>
+              <i class="fa fa-map-marker-alt"></i>
+              Central Learning Theatre (CLT)
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Event 2 -->
+      <div class="event-card">
+
+        <div class="card-img">
+          <img src="images/event2.png" alt="BTKS 2026">
+        </div>
+
+        <div class="card-body">
+
+          <div class="card-title">
+            Bharatiya Traditional Knowledge Systems 2026
+          </div>
+
+          <div class="event-meta">
+
+            <span>
+              <i class="fa fa-calendar"></i>
+              05/09/2026 09:30 AM - 06/09/2026 05:30 PM
+            </span>
+
+            <span>
+              <i class="fa fa-map-marker-alt"></i>
+              IIT DHARWAD, Karnataka
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+     STUDENT HIGHLIGHTS
+═══════════════════════════════════════ -->
+  <div class="page-section">
+
+    <div class="section-header">
+      <h2>Student Highlights</h2>
+      <a href="#" class="view-more-btn">View More</a>
+    </div>
+
+    <div class="cards-carousel">
+
+      <button class="carousel-btn prev">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+
+      <div class="cards-track">
+
+        <!-- Student 1 -->
+        <div class="news-card">
+          <div class="card-img">
+            <img src="images/stu1.jpeg" alt="Student Highlight 1">
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">
+              Mr. Manjunathgouda M Patil from the Department of Civil &amp; Infrastructure Engineering, presented his
+              research at Campus Tweekerken, Universiteit Gent.
+            </div>
+          </div>
+        </div>
+
+        <!-- Student 2 -->
+        <div class="news-card">
+          <div class="card-img">
+            <img src="images/stu2.jpeg" alt="Student Highlight 2">
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">
+              Mr. Rahul Bangari, a Ph.D. student under the supervision of Dr. Supriya Rej, has been awarded the Best
+              Poster Presentation Award at RS-2026.
+            </div>
+          </div>
+        </div>
+
+        <!-- Student 3 -->
+        <div class="news-card">
+          <div class="card-img">
+            <img src="images/stu3.jpeg" alt="Student Highlight 3">
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">
+              Dr. P. Sreekanth Reddy, Research Associate-III, Dept. of CIE, published an article in Developments in the
+              Built Environment.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carousel-btn next">
+        <i class="fa fa-chevron-right"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+     GALLERY
+═══════════════════════════════════════ -->
+  <div class="page-section">
+
+    <div class="section-header">
+      <h2>Gallery</h2>
+      <a href="#" class="view-more-btn">View All Gallery</a>
+    </div>
+
+    <div class="cards-carousel">
+
+      <button class="carousel-btn prev">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+
+      <div class="cards-track">
+
+        <!-- Gallery 1 -->
+        <div class="news-card">
+          <div class="card-img">
+            <img src="images/gal1.png" alt="Gallery Image 1">
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">
+              Chairman, Board of Governors, IIT Dharwad Visits the Institute (4-5 June 2026)
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery 2 -->
+        <div class="news-card">
+          <div class="card-img">
+            <img src="images/gal2.png" alt="Gallery Image 2">
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">
+              The Internal Complaints Committee, IIT Dharwad, organized a Gender Sensitisation Workshop on 10 January
+              2026 at CLT, Room No. F-600.
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery 3 -->
+        <div class="news-card">
+          <div class="card-img">
+            <img src="images/gal3.jpeg" alt="Gallery Image 3">
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">
+              IIT Dharwad Hosts Distinguished Lecture by Ambassador Anil Trigunayat on Global Geopolitical Dynamics.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carousel-btn next">
+        <i class="fa fa-chevron-right"></i>
+      </button>
+
+    </div>
+
+  </div>
+  <!-- ═══════════════════════════════════════
+     STATS GRID (2 rows × 8 boxes)
+═══════════════════════════════════════ -->
+  <div class="stats-section">
+    <!-- Row 1 -->
+    <div class="stats-row">
+      <div class="stat-box">
+        <i class="fa fa-th-large"></i>
+        <div class="num">10</div>
+        <div class="lbl">Departments</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-user-graduate"></i>
+        <div class="num">1579</div>
+        <div class="lbl">Students</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-chalkboard-teacher"></i>
+        <div class="num">104</div>
+        <div class="lbl">Faculty Members</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-id-badge"></i>
+        <div class="num">82</div>
+        <div class="lbl">Permanent Staff</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-file-contract"></i>
+        <div class="num">18</div>
+        <div class="lbl">On Contract Staff</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-people-carry"></i>
+        <div class="num">118</div>
+        <div class="lbl">Outsourced Staff</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-university"></i>
+        <div class="num">2</div>
+        <div class="lbl">Centers of Excellence (CoE)</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-rocket"></i>
+        <div class="num">24</div>
+        <div class="lbl">Startups</div>
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="stats-row">
+      <div class="stat-box">
+        <i class="fa fa-microscope"></i>
+        <div class="num">5</div>
+        <div class="lbl">Research Centres</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-cog"></i>
+        <div class="num">3</div>
+        <div class="lbl">Patents Granted</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-book"></i>
+        <div class="num">1000+</div>
+        <div class="lbl">Publications</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-quote-left"></i>
+        <div class="num">8000+</div>
+        <div class="lbl">Citations</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-graduation-cap"></i>
+        <div class="num">786</div>
+        <div class="lbl">B.Tech Students Graduated</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-graduation-cap"></i>
+        <div class="num">40</div>
+        <div class="lbl">M.Tech Students Graduated</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-flask"></i>
+        <div class="num">37</div>
+        <div class="lbl">MS Students Graduated</div>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-user-graduate"></i>
+        <div class="num">43</div>
+        <div class="lbl">PhD Students Graduated</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+     GREEN CAMPUS BANNER (PBaK)
+═══════════════════════════════════════ -->
+  <div class="green-banner">
+    <div class="banner-bg"></div>
+    <div class="banner-content">
+      <h2>Creating an Academic Campus with Net Zero in Water, Energy, and Waste<br>[ParashurAma BasavEshwara akshaya
+        KshEtra (PBaK)]</h2>
+      <p>IIT DHARWAD is committed to create an Academic Campus having net zero in water, energy, and waste by 2030, as
+        mandated by its Board of Governors (BoG)....</p>
+      <a href="#" class="view-more-outline">View More</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+     PLACEMENT REPORT
+═══════════════════════════════════════ -->
+  <section class="placement-section">
+
+    <div class="placement-inner">
+
+      <h2>Placement Report – Academic Year 2024–25</h2>
+
+      <div class="placement-grid">
+
+        <!-- =================== BTECH =================== -->
+
+        <div class="placement-card">
+
+          <div class="reg-title">
+            Registered students :121
+          </div>
+
+          <div class="placement-content">
+
+            <div class="left-label top">
+              Number of students opted<br>
+              for competitive exams
+            </div>
+
+            <div class="right-label top">
+              Number of<br>students placed
+            </div>
+
+            <div class="left-label bottom">
+              Number of students opted<br>
+              for higher education
+            </div>
+
+            <div class="right-label bottom">
+              Placement percentage
+            </div>
+
+            <div class="circle">
+
+              <div class="quad purple">
+                <span>03</span>
+              </div>
+
+              <div class="quad green">
+                <span>103</span>
+              </div>
+
+              <div class="quad blue">
+                <span>11</span>
+              </div>
+
+              <div class="quad orange">
+                <span>96.7%</span>
+              </div>
+
+              <div class="center-text">
+                B.Tech
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- =================== MTECH =================== -->
+
+        <div class="placement-card">
+
+          <div class="reg-title">
+            Registered students :26
+          </div>
+
+          <div class="placement-content">
+
+            <div class="left-label top">
+              Number of students opted<br>
+              for competitive exams
+            </div>
+
+            <div class="right-label top">
+              Number of<br>students placed
+            </div>
+
+            <div class="left-label bottom">
+              Number of students opted<br>
+              for higher education
+            </div>
+
+            <div class="right-label bottom">
+              Placement percentage
+            </div>
+
+            <div class="circle">
+
+              <div class="quad purple">
+                <span>00</span>
+              </div>
+
+              <div class="quad green">
+                <span>21</span>
+              </div>
+
+              <div class="quad blue">
+                <span>03</span>
+              </div>
+
+              <div class="quad orange">
+                <span>96.5%</span>
+              </div>
+
+              <div class="center-text">
+                M.Tech
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Address -->
+      <div class="footer-address">
+        <h4>IIT Dharwad</h4>
+        <p>
+          INDIAN INSTITUTE OF TECHNOLOGY DHARWAD<br>
+          PERMANENT CAMPUS<br>
+          CHIKKAMALLIGAWAD<br>
+          DHARWAD – 580 011<br>
+          KARNATAKA<br>
+          BHARATA (INDIA)
+        </p>
+        <a href="mailto:pro@iitdh.ac.in" class="contact-link"><i class="fa fa-envelope"></i> pro@iitdh.ac.in</a>
+        <a href="#" class="contact-link"><i class="fa fa-phone"></i> Contact Us</a>
+      </div>
+
+      <!-- Academics -->
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="#">Announcements</a></li>
+          <li><a href="#">Departments</a></li>
+          <li><a href="#">Programs</a></li>
+          <li><a href="#">B.Tech Admissions</a></li>
+          <li><a href="#">BS Admissions</a></li>
+          <li><a href="#">M.Sc. Admissions</a></li>
+          <li><a href="#">M.Tech Admissions</a></li>
+          <li><a href="#">M.Tech (R) Admissions SCIF</a></li>
+          <li><a href="#">Ph.D Admissions</a></li>
+        </ul>
+      </div>
+
+      <!-- Research -->
+      <div class="footer-col">
+        <h4>Research</h4>
+        <ul>
+          <li><a href="#">Consultancy Projects</a></li>
+          <li><a href="#">IRINS</a></li>
+          <li><a href="#">Project Vacancies</a></li>
+          <li><a href="#">Publications</a></li>
+          <li><a href="#">Sponsored Projects</a></li>
+          <li><a href="#">R&amp;D Website</a></li>
+          <li><a href="#">Incubation Center</a></li>
+        </ul>
+      </div>
+
+      <!-- People -->
+      <div class="footer-col">
+        <h4>People</h4>
+        <ul>
+          <li><a href="#">Administration</a></li>
+          <li><a href="#">Faculty</a></li>
+          <li><a href="#">RA/iPDF</a></li>
+          <li><a href="#">Research Scholars</a></li>
+          <li><a href="#">Staff</a></li>
+          <li><a href="#">Students</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Access -->
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <ul>
+          <li><a href="#">About DHARWAD</a></li>
+          <li><a href="#">Anti-Ragging Cell</a></li>
+          <li><a href="#">Chief Vigilance Officer</a></li>
+          <li><a href="#">Counselling Center</a></li>
+          <li><a href="#">Creche Facility</a></li>
+          <li><a href="#">CSR Contribution</a></li>
+          <li><a href="#">Doctors' Availability</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Grievance Redressal</a></li>
+          <li><a href="#">ICC</a></li>
+          <li><a href="#">Intranet</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      © 2024 Indian Institute of Technology Dharwad. All Rights Reserved. &nbsp;|&nbsp;
+      <a href="#" style="color:rgba(255,255,255,0.6);">Website Policy</a> &nbsp;|&nbsp;
+      <a href="#" style="color:rgba(255,255,255,0.6);">Privacy Policy</a> &nbsp;|&nbsp;
+      <a href="#" style="color:rgba(255,255,255,0.6);">Accessibility Statement</a>
+    </div>
+  </footer>
+
+  <!-- Social floating icons -->
+  <div class="social-float">
+    <a href="https://twitter.com/iitdharwad" class="tw" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://www.youtube.com/@iitdharwad" class="yt" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.linkedin.com/school/iit-dharwad" class="li" target="_blank"><i
+        class="fab fa-linkedin-in"></i></a>
+  </div>
+
+  <!-- Scroll to top -->
+  <button id="back-top" title="Back to top"><i class="fa fa-chevron-up"></i></button>
+
+  <!-- ═══════════════════════════════════════
+     JS
+═══════════════════════════════════════ -->
+  <script>
+    // ── Hero Slider ──
+    const slides = document.querySelectorAll(".slide");
+    const dotsContainer = document.getElementById("hero-dots");
+
+    let current = 0;
+
+    slides.forEach((slide, index) => {
+
+      const dot = document.createElement("button");
+
+      if (index == 0)
+        dot.classList.add("active");
+
+      dot.onclick = () => showSlide(index);
+
+      dotsContainer.appendChild(dot);
+
+    });
+
+    const dots = document.querySelectorAll("#hero-dots button");
+
+    function showSlide(index) {
+
+      slides[current].classList.remove("active");
+      const welcome = slides[current].querySelector(".welcome");
+      const iit = slides[current].querySelector(".iit");
+
+      if (welcome) {
+
+        welcome.style.animation = "none";
+        iit.style.animation = "none";
+
+        welcome.offsetHeight;
+        iit.offsetHeight;
+
+        welcome.style.animation = "fadeDown 1.2s ease";
+        iit.style.animation = "zoomUp 1.4s ease";
+      }
+      dots[current].classList.remove("active");
+
+      current = index;
+
+      if (current >= slides.length)
+        current = 0;
+
+      if (current < 0)
+        current = slides.length - 1;
+
+      slides[current].classList.add("active");
+      dots[current].classList.add("active");
+
+    }
+
+    document.getElementById("hero-next").onclick = function () {
+
+      showSlide(current + 1);
+
+    };
+
+    document.getElementById("hero-prev").onclick = function () {
+
+      showSlide(current - 1);
+
+    };
+
+    setInterval(function () {
+
+      showSlide(current + 1);
+
+    }, 5000);
+
+    // ── Hamburger ──
+    document.getElementById('hamburger').addEventListener('click', function () {
+      document.getElementById('main-nav').classList.toggle('open');
+    });
+
+    // ── Scroll to top ──
+    window.addEventListener('scroll', () => {
+      document.getElementById('back-top').classList.toggle('show', window.scrollY > 400);
+    }, { passive: true });
+    document.getElementById('back-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ── Font size controls ──
+    let fz = 16;
+    document.querySelectorAll('.font-size-ctrl button').forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        if (i === 0 && fz > 12) fz--;
+        else if (i === 1) fz = 16;
+        else if (i === 2 && fz < 22) fz++;
+        document.documentElement.style.fontSize = fz + 'px';
+      });
+    });
+
+    // ── Search bar ──
+    // ── Search bar (on-page search, no backend) ──
+    const searchInput = document.querySelector('.top-nav-search input');
+    const searchIcon = document.querySelector('.top-nav-search i');
+    const searchBox = document.querySelector('.top-nav-search');
+
+    function runSearch() {
+      const query = searchInput.value.trim().toLowerCase();
+
+      // remove any previous "no results" message
+      const oldMsg = searchBox.querySelector('.search-no-results');
+      if (oldMsg) oldMsg.remove();
+
+      if (!query) return;
+
+      // remove old highlights
+      document.querySelectorAll('.search-highlight').forEach(el => el.classList.remove('search-highlight'));
+
+      // elements to search through
+      const searchable = document.querySelectorAll(
+        '.main-nav a, .ann-item a, .news-card .card-title, .event-card .card-title, .footer-col a'
+      );
+
+      let match = null;
+      searchable.forEach(el => {
+        if (!match && el.textContent.toLowerCase().includes(query)) {
+          match = el;
+        }
+      });
+
+      if (match) {
+        match.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const target = match.closest('.news-card, .event-card, .ann-item') || match;
+        target.classList.add('search-highlight');
+        setTimeout(() => target.classList.remove('search-highlight'), 2500);
+      } else {
+        const msg = document.createElement('div');
+        msg.className = 'search-no-results';
+        msg.textContent = 'No matches found on this page';
+        searchBox.appendChild(msg);
+        setTimeout(() => msg.remove(), 2500);
+      }
+    }
+
+    searchInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') runSearch();
+    });
+
+    searchIcon.style.cursor = 'pointer';
+    searchIcon.addEventListener('click', runSearch);
+  </script>
+
+  <!-- ═══════════════════════════════════════
+     CHATBOT WIDGET
+═══════════════════════════════════════ -->
+  <button id="chatbot-toggler">
+    <span class="material-symbols-rounded">mode_comment</span>
+    <span class="material-symbols-rounded">close</span>
+  </button>
+  <div class="chatbot-popup">
+    <!-- Chatbot Header -->
+    <div class="chat-header">
+      <div class="header-info">
+        <svg class="chatbot-logo" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+          <path
+            d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"
+          />
+        </svg>
+        <h2 class="logo-text">Chatbot</h2>
+      </div>
+      <button id="close-chatbot" class="material-symbols-rounded">keyboard_arrow_down</button>
+    </div>
+    <!-- Chatbot Body -->
+    <div class="chat-body">
+      <div class="message bot-message">
+        <svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+          <path
+            d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"
+          />
+        </svg>
+        <!-- prettier-ignore -->
+        <div class="message-text"> Hey there  <br /> How can I help you today? </div>
+      </div>
+    </div>
+    <!-- Chatbot Footer -->
+    <div class="chat-footer">
+      <form action="#" class="chat-form">
+        <textarea placeholder="Message..." class="message-input" required></textarea>
+        <div class="chat-controls">
+          <button type="button" id="emoji-picker" class="material-symbols-outlined">sentiment_satisfied</button>
+          <div class="file-upload-wrapper">
+            <input type="file" accept="image/*" id="file-input" hidden />
+            <img src="#" />
+            <button type="button" id="file-upload" class="material-symbols-rounded">attach_file</button>
+            <button type="button" id="file-cancel" class="material-symbols-rounded">close</button>
+          </div>
+          <button type="submit" id="send-message" class="material-symbols-rounded">arrow_upward</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Linking Emoji Mart script for emoji picker -->
+  <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+  <!-- Linking custom chatbot script -->
+  <script src="script-c.js"></script>
+</body>
+
+</html>

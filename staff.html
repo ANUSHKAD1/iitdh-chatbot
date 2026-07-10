@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff | IIT Dharwad</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; font-size: 14px; color: #333; background: #fff; }
+
+    /* TOP BAR */
+    .top-bar { background: #6a0572; color: #fff; font-size: 12px; padding: 4px 16px; display: flex; gap: 16px; }
+    .top-bar a { color: #fff; text-decoration: none; }
+
+    /* HEADER */
+    header { display: flex; align-items: center; padding: 10px 24px; border-bottom: 2px solid #6a0572; gap: 16px; }
+    .logo-text .hindi { font-size: 13px; color: #444; }
+    .logo-text .english { font-size: 15px; font-weight: bold; color: #6a0572; letter-spacing: 0.5px; }
+
+    /* NAV */
+    nav { background: #6a0572; display: flex; flex-wrap: wrap; }
+    nav a { color: #fff; text-decoration: none; padding: 10px 16px; font-size: 13px; display: block; }
+    nav a:hover { background: #4a0352; }
+
+    /* PAGE TITLE */
+    .page-title { text-align: center; padding: 30px 16px 20px; font-size: 26px; font-weight: bold; color: #222; }
+
+    /* TABS */
+    .tabs { display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; background: #f5f5f5; border: 1px solid #ddd; }
+    .tab { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 28px; cursor: pointer; text-decoration: none; color: #6a0572; font-size: 12px; font-weight: bold; letter-spacing: 0.5px; border-right: 1px solid #ddd; min-width: 110px; transition: background 0.2s; }
+    .tab:last-child { border-right: none; }
+    .tab:hover { background: #6a0572; color: #fff; }
+    .tab.active { background: #6a0572; color: #fff; }
+    .tab svg { width: 32px; height: 32px; margin-bottom: 6px; fill: currentColor; }
+
+    /* NOTICE */
+    .notice { text-align: center; margin: 0 auto 16px; font-size: 13px; }
+    .notice a { color: #e6a817; font-weight: bold; text-decoration: none; }
+    .notice a:hover { text-decoration: underline; }
+
+    /* CONTROLS */
+    .controls { max-width: 980px; margin: 0 auto 20px; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .controls label { font-size: 13px; font-weight: bold; white-space: nowrap; }
+    .controls input[type="text"] { border: 1px solid #aaa; border-radius: 4px; padding: 6px 12px; font-size: 13px; width: 220px; outline: none; }
+    .controls input[type="text"]:focus { border-color: #6a0572; }
+    .controls select { border: 1px solid #aaa; border-radius: 4px; padding: 6px 12px; font-size: 13px; min-width: 200px; }
+    .btn-staff { background: #e6a817; color: #fff; border: none; padding: 7px 18px; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; margin-left: auto; }
+    .btn-dept { background: #fff; color: #333; border: 1px solid #aaa; padding: 7px 14px; border-radius: 4px; font-size: 13px; cursor: pointer; }
+    .btn-dept:hover { background: #f0f0f0; }
+
+    /* DEPT FILTER LABEL */
+    .dept-filter { max-width: 980px; margin: 0 auto 20px; padding: 0 20px; display: flex; align-items: center; gap: 12px; }
+    .dept-filter label { font-size: 13px; font-weight: bold; white-space: nowrap; }
+    .dept-filter select { border: 1px solid #aaa; border-radius: 4px; padding: 6px 12px; font-size: 13px; min-width: 280px; }
+
+    /* CARDS */
+    .cards-grid { max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .card { display: flex; align-items: flex-start; gap: 16px; border: 1px solid #ddd; border-radius: 6px; padding: 18px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .card-photo-placeholder { width: 120px; height: 140px; background: #d4c0dc; border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #6a0572; font-size: 36px; }
+    .card-info { flex: 1; }
+    .card-info h3 { font-size: 15px; font-weight: bold; color: #222; margin-bottom: 3px; }
+    .card-info .role { font-size: 13px; color: #444; margin-bottom: 2px; line-height: 1.4; }
+    .card-info .section { font-size: 13px; color: #444; margin-bottom: 6px; line-height: 1.4; }
+    .card-info .email { font-size: 12px; color: #6a0572; display: flex; align-items: center; gap: 4px; text-decoration: none; margin-top: 4px; }
+    .card-info .email:hover { text-decoration: underline; }
+
+    /* SOCIAL SIDEBAR */
+    .social-sidebar { position: fixed; right: 10px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 100; }
+    .social-sidebar a { width: 32px; height: 32px; background: #6a0572; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 14px; text-decoration: none; font-weight: bold; }
+
+    /* FOOTER */
+    footer { background: #6a0572; color: #fff; padding: 36px 40px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr 1fr; gap: 24px; font-size: 13px; }
+    footer h4 { color: #fff; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 6px; font-weight: bold; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 5px; }
+    footer ul li a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 12px; }
+    footer ul li a:hover { color: #fff; text-decoration: underline; }
+    footer ul li a.active-link { color: #ffd700; }
+    .footer-address { font-size: 12px; line-height: 2; color: rgba(255,255,255,0.85); }
+    .footer-address a { color: rgba(255,255,255,0.85); text-decoration: none; }
+
+    @media (max-width: 700px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr 1fr; }
+      .tab { padding: 12px 14px; min-width: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Search...</a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="35" cy="35" r="33" fill="#6a0572" opacity="0.12" stroke="#6a0572" stroke-width="2"/>
+    <text x="35" y="42" text-anchor="middle" font-size="13" font-weight="bold" fill="#6a0572" font-family="Arial">IIT</text>
+    <text x="35" y="55" text-anchor="middle" font-size="8" fill="#6a0572" font-family="Arial">DHARWAD</text>
+  </svg>
+  <div class="logo-text">
+    <div class="hindi">ਭਾਰਤੀਯ ਤੰਤ੍ਰਜ੍ਞਾਨ ਸੰਸ੍ਥੇ ਧਾਰਵਾਡ</div>
+    <div class="hindi">भारतीय प्रौद्योगिकी संस्थान धारवाड</div>
+    <div class="english">INDIAN INSTITUTE OF TECHNOLOGY DHARWAD</div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Leadership</a>
+  <a href="#">Recruitment</a>
+  <a href="#">Notifications</a>
+  <a href="#">Alumni &amp; Wellwishers</a>
+  <a href="#">Academics</a>
+  <a href="#">Campus</a>
+  <a href="#">Reports</a>
+  <a href="#">Contact Us</a>
+</nav>
+
+<!-- PAGE TITLE -->
+<div class="page-title">Staff</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <a href="#" class="tab">
+    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    FACULTY
+  </a>
+  <a href="#" class="tab">
+    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+    RA/IPDF
+  </a>
+  <a href="#" class="tab active">
+    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    STAFF
+  </a>
+  <a href="#" class="tab">
+    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+    RESEARCH<br>SCHOLARS
+  </a>
+  <a href="#" class="tab">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
+    ADVISORS
+  </a>
+  <a href="#" class="tab">
+    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+    FORMER<br>ASSOCIATES
+  </a>
+</div>
+
+<!-- NOTICE -->
+<div class="notice">&#9400; Indicates <a href="#">Outsourced Staff</a></div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <label>Search Staff</label>
+  <input type="text" id="searchInput" placeholder="Enter here for search......"/>
+  <button class="btn-staff">Staff</button>
+  <button class="btn-dept">Show Department-wise</button>
+</div>
+<div class="dept-filter">
+  <label>Section | Department</label>
+  <select id="deptSelect">
+    <option value="">- Any -</option>
+    <option>Academics Section</option>
+    <option>Career Development Cell</option>
+    <option>Chemical Engineering</option>
+    <option>Civil &amp; Infrastructure Engineering (CIE)</option>
+    <option>Computer, Networking and Communication System Section</option>
+    <option>Computer Science and Engineering (CSE)</option>
+    <option>Contract &amp; Services Section</option>
+    <option>Director's Secretariat</option>
+    <option>Electrical, Electronics and Communication Engineering (EECE)</option>
+    <option>ERP Cell</option>
+    <option>Faculty Welfare</option>
+    <option>Finance &amp; Accounts Section</option>
+    <option>General Administration Section</option>
+    <option>Infrastructure, Planning and Support Section</option>
+    <option>Internal Audit</option>
+    <option>Knowledge Centre</option>
+    <option>Materials Management Division</option>
+    <option>Mechanical, Materials and Aerospace Engineering (MMAE)</option>
+    <option>Physical Education Section</option>
+    <option>Physics</option>
+    <option>Registrar Office</option>
+    <option>Research &amp; Development Section</option>
+    <option>Staff Section</option>
+    <option>Student Welfare Section</option>
+    <option>Student Welfare - Wellness</option>
+  </select>
+</div>
+
+<!-- CARDS GRID -->
+<div class="cards-grid" id="cardsGrid">
+
+  <div class="card" data-text="Abhishek Hadapad Junior Technician Computer Networking Communication System Section abhishek@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Abhishek Hadapad</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Computer, Networking and Communication System Section</div>
+      <a class="email" href="mailto:abhishek@iitdh.ac.in">✉ abhishek@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Abhishek Kumar Junior Assistant Research Development Section abhishekkumar.m@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Abhishek Kumar</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Research &amp; Development Section</div>
+      <a class="email" href="mailto:abhishekkumar.m@iitdh.ac.in">✉ abhishekkumar.m@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Abhishek Ramakrishna Juvatkar Developer On Contract ERP Cell abhishekjuvatkar@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Abhishek Ramakrishna Juvatkar</h3>
+      <div class="role">Developer [On Contract]</div>
+      <div class="section">ERP Cell</div>
+      <a class="email" href="mailto:abhishekjuvatkar@iitdh.ac.in">✉ abhishekjuvatkar@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Ajay Kumar Thuppathi Junior Assistant Finance Accounts Section ajaythuppathi@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Ajay Kumar Thuppathi</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Finance &amp; Accounts Section</div>
+      <a class="email" href="mailto:ajaythuppathi@iitdh.ac.in">✉ ajaythuppathi@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Akash Nitture Civil Engineer On Contract Infrastructure Planning Support Section akash.nitture@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Akash Nitture</h3>
+      <div class="role">Civil Engineer [On Contract]</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:akash.nitture@iitdh.ac.in">✉ akash.nitture@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Akash Pol Junior Engineer Civil Infrastructure Planning Support Section akashlpol@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Akash Pol</h3>
+      <div class="role">Junior Engineer (Civil)</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:akashlpol@iitdh.ac.in">✉ akashlpol@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Ammanola Praveen Kumar Assistant Executive Engineer Civil Infrastructure Planning Support Section apk@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Ammanola Praveen Kumar</h3>
+      <div class="role">Assistant Executive Engineer (Civil)</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:apk@iitdh.ac.in">✉ apk@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Amol Diwate Junior Superintendent Student Welfare Section amoldiwate@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Amol Diwate</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Student Welfare Section</div>
+      <a class="email" href="mailto:amoldiwate@iitdh.ac.in">✉ amoldiwate@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Anand Kishore Junior Technical Superintendent Mechanical Materials Aerospace Engineering MMAE anandkishore@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Anand Kishore</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Mechanical, Materials and Aerospace Engineering (MMAE)</div>
+      <a class="email" href="mailto:anandkishore@iitdh.ac.in">✉ anandkishore@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Anita Verma Junior Assistant Biosciences Bioengineering BSBE Chemical Engineering anitaverma@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Anita Verma</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Biosciences and Bioengineering (BSBE), Chemical Engineering</div>
+      <a class="email" href="mailto:anitaverma@iitdh.ac.in">✉ anitaverma@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Appasaheb Vijayanand Sheelavant Knowledge Resource Information Officer Knowledge Centre avsheelavant@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Appasaheb Vijayanand Sheelavant</h3>
+      <div class="role">Knowledge Resource and Information Officer</div>
+      <div class="section">Knowledge Centre</div>
+      <a class="email" href="mailto:avsheelavant@iitdh.ac.in">✉ avsheelavant@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Arun Verma Assistant Registrar International Relation Office arun.verma@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Arun Verma</h3>
+      <div class="role">Assistant Registrar</div>
+      <div class="section">International Relation Office</div>
+      <a class="email" href="mailto:arun.verma@iitdh.ac.in">✉ arun.verma@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Balaji C Hakari Developer On Contract ERP Cell balajihakari@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Balaji C Hakari</h3>
+      <div class="role">Developer [On Contract]</div>
+      <div class="section">ERP Cell</div>
+      <a class="email" href="mailto:balajihakari@iitdh.ac.in">✉ balajihakari@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Bharath G Relekar Junior Technical Superintendent Chemical Engineering bharath.gr@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Bharath G Relekar</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Chemical Engineering</div>
+      <a class="email" href="mailto:bharath.gr@iitdh.ac.in">✉ bharath.gr@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Bhimsen Narayan Karadin Junior Technical Superintendent Mechanical Materials Aerospace Engineering MMAE bhimsen@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Bhimsen Narayan Karadin</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Mechanical, Materials and Aerospace Engineering (MMAE)</div>
+      <a class="email" href="mailto:bhimsen@iitdh.ac.in">✉ bhimsen@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Bishwanath Gorai Junior Technician Mechanical Materials Aerospace Engineering MMAE bishwanath9798@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Bishwanath Gorai</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Mechanical, Materials and Aerospace Engineering (MMAE)</div>
+      <a class="email" href="mailto:bishwanath9798@iitdh.ac.in">✉ bishwanath9798@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Chandrashekar S Junior Technical Superintendent Computer Science Engineering CSE chandrashekar.s@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Chandrashekar S</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Computer Science and Engineering (CSE)</div>
+      <a class="email" href="mailto:chandrashekar.s@iitdh.ac.in">✉ chandrashekar.s@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Chetan Basavaraj Totad Assistant Registrar Research Development Student Welfare Wellness chetan.totad@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Chetan Basavaraj Totad</h3>
+      <div class="role">Assistant Registrar</div>
+      <div class="section">Research &amp; Development Section, Student Welfare Section, Student Welfare - Wellness</div>
+      <a class="email" href="mailto:chetan.totad@iitdh.ac.in">✉ chetan.totad@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Chetan Kumar M Junior Assistant Humanities Economics Arts Rural Technologies HEART Mathematics chetankumar@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Chetan Kumar M</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Humanities, Economics, Arts and Rural Technologies (HEART), Mathematics</div>
+      <a class="email" href="mailto:chetankumar@iitdh.ac.in">✉ chetankumar@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Chitra S Naik Junior Technician Computer Networking Communication System Section chitra.naik@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Chitra S Naik</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Computer, Networking and Communication System Section</div>
+      <a class="email" href="mailto:chitra.naik@iitdh.ac.in">✉ chitra.naik@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Daripalli Srinivasa Rao Junior Engineer MEPN Infrastructure Planning Support Section daripalli.sr@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Daripalli Srinivasa Rao</h3>
+      <div class="role">Junior Engineer (MEPN)</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:daripalli.sr@iitdh.ac.in">✉ daripalli.sr@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Darshana K Gandhi RCI Registered Clinical Psychologist On Contract Student Welfare Wellness darshanaclinicalpsychologist@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Darshana K Gandhi</h3>
+      <div class="role">RCI Registered Clinical Psychologist [On Contract]</div>
+      <div class="section">Student Welfare - Wellness</div>
+      <a class="email" href="mailto:darshanaclinicalpsychologist@iitdh.ac.in">✉ darshanaclinicalpsychologist@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Deepak P P Junior Technical Superintendent Chemistry deepak.p@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Deepak P P</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Chemistry</div>
+      <a class="email" href="mailto:deepak.p@iitdh.ac.in">✉ deepak.p@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Deepak Tiwari Junior Superintendent Contract Services Section deepaktiwari@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Deepak Tiwari</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Contract &amp; Services Section</div>
+      <a class="email" href="mailto:deepaktiwari@iitdh.ac.in">✉ deepaktiwari@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Deepika B G Junior Technician Chemistry deepikabg@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Deepika B G</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Chemistry</div>
+      <a class="email" href="mailto:deepikabg@iitdh.ac.in">✉ deepikabg@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Dr Anuradha Biserotti Medical officer Ayurveda On Contract Student Welfare Wellness ayuanuradha@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Dr Anuradha Biserotti</h3>
+      <div class="role">Medical officer [Ayurveda] [On Contract]</div>
+      <div class="section">Student Welfare - Wellness</div>
+      <a class="email" href="mailto:ayuanuradha@iitdh.ac.in">✉ ayuanuradha@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Dr D Harish Kumar Medical Officer Allopathy On Contract Student Welfare Wellness hkmishra66@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Dr D Harish Kumar</h3>
+      <div class="role">Medical Officer [Allopathy] [On Contract]</div>
+      <div class="section">Student Welfare - Wellness</div>
+      <a class="email" href="mailto:hkmishra66@iitdh.ac.in">✉ hkmishra66@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Dr Geeta Bagewadi Medical officer Homoeopathy On Contract Student Welfare Wellness drgeeta@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Dr Geeta Bagewadi</h3>
+      <div class="role">Medical officer [Homoeopathy] [On Contract]</div>
+      <div class="section">Student Welfare - Wellness</div>
+      <a class="email" href="mailto:drgeeta@iitdh.ac.in">✉ drgeeta@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Dr Kalyan Kumar Bhattacharjee Registrar General Administration Section kalyan@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Dr Kalyan Kumar Bhattacharjee</h3>
+      <div class="role">Registrar</div>
+      <div class="section">General Administration Section</div>
+      <a class="email" href="mailto:kalyan@iitdh.ac.in">✉ kalyan@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Dr Keerthi Kumar M Sports Officer Physical Education Section keerthi.kumar@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Dr Keerthi Kumar M</h3>
+      <div class="role">Sports Officer</div>
+      <div class="section">Physical Education Section</div>
+      <a class="email" href="mailto:keerthi.kumar@iitdh.ac.in">✉ keerthi.kumar@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Dr Muniramaiah Reddivari Junior Technical Superintendent Physics muniram@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Dr Muniramaiah Reddivari</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Physics</div>
+      <a class="email" href="mailto:muniram@iitdh.ac.in">✉ muniram@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Dr Shobha Mulimani Medical Officer Allopathy On Contract Student Welfare Wellness shobhabikk@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Dr Shobha Mulimani</h3>
+      <div class="role">Medical Officer [Allopathy] [On Contract]</div>
+      <div class="section">Student Welfare - Wellness</div>
+      <a class="email" href="mailto:shobhabikk@iitdh.ac.in">✉ shobhabikk@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="G Karthik Kumar Senior Technical Superintendent Electrical Electronics Communication Engineering EECE karthik.kumar@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>G Karthik Kumar</h3>
+      <div class="role">Senior Technical Superintendent</div>
+      <div class="section">Electrical, Electronics and Communication Engineering (EECE)</div>
+      <a class="email" href="mailto:karthik.kumar@iitdh.ac.in">✉ karthik.kumar@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="G Ramamurthy Assistant Academics Section gramamurthy@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>G Ramamurthy</h3>
+      <div class="role">Assistant</div>
+      <div class="section">Academics Section</div>
+      <a class="email" href="mailto:gramamurthy@iitdh.ac.in">✉ gramamurthy@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Garikipati Veera Venkata Anil Kumar Developer On Contract ERP Cell ganilkumar@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Garikipati Veera Venkata Anil Kumar</h3>
+      <div class="role">Developer [On Contract]</div>
+      <div class="section">ERP Cell</div>
+      <a class="email" href="mailto:ganilkumar@iitdh.ac.in">✉ ganilkumar@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Gayatri Rayar Senior Technical Superintendent Computer Networking Communication System Section ERP Cell gayatri.rayar@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Gayatri Rayar</h3>
+      <div class="role">Senior Technical Superintendent</div>
+      <div class="section">Computer, Networking and Communication System Section, ERP Cell</div>
+      <a class="email" href="mailto:gayatri.rayar@iitdh.ac.in">✉ gayatri.rayar@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Gireesha Halagappanavara Junior assistant Materials Management Division girish.h@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Gireesha Halagappanavara</h3>
+      <div class="role">Junior assistant</div>
+      <div class="section">Materials Management Division</div>
+      <a class="email" href="mailto:girish.h@iitdh.ac.in">✉ girish.h@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Giridhar S Kittur Senior Superintendent Materials Management Division giridhar.kittur@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Giridhar S Kittur</h3>
+      <div class="role">Senior Superintendent</div>
+      <div class="section">Materials Management Division</div>
+      <a class="email" href="mailto:giridhar.kittur@iitdh.ac.in">✉ giridhar.kittur@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Gowtham R Junior Superintendent Staff Section rgowtham@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Gowtham R</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Staff Section</div>
+      <a class="email" href="mailto:rgowtham@iitdh.ac.in">✉ rgowtham@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Gundaveni Ramesh Deputy Sports Officer Physical Education Section rameshg@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Gundaveni Ramesh</h3>
+      <div class="role">Deputy Sports Officer</div>
+      <div class="section">Physical Education Section</div>
+      <a class="email" href="mailto:rameshg@iitdh.ac.in">✉ rameshg@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Gurumurthy N Junior Superintendent Horticulture Infrastructure Planning Support Section gurumurthy@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Gurumurthy N</h3>
+      <div class="role">Junior Superintendent (Horticulture)</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:gurumurthy@iitdh.ac.in">✉ gurumurthy@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Guruprasada T Junior Assistant Computer Science Engineering CSE Electrical Electronics Communication Engineering EECE guruprasada@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Guruprasada T</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Computer Science and Engineering (CSE), Electrical, Electronics and Communication Engineering (EECE)</div>
+      <a class="email" href="mailto:guruprasada@iitdh.ac.in">✉ guruprasada@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Harsha N Senior Superintendent Director Secretariat harsha.n@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Harsha N</h3>
+      <div class="role">Senior Superintendent</div>
+      <div class="section">Director's Secretariat</div>
+      <a class="email" href="mailto:harsha.n@iitdh.ac.in">✉ harsha.n@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Inderpal Assistant Registrar Academics Section Contract Services Section inderpal@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Inderpal</h3>
+      <div class="role">Assistant Registrar</div>
+      <div class="section">Academics Section, Contract &amp; Services Section</div>
+      <a class="email" href="mailto:inderpal@iitdh.ac.in">✉ inderpal@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Jeevanandharaj S D Junior Technician Civil Infrastructure Engineering CIE jeevasd@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Jeevanandharaj S D</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Civil &amp; Infrastructure Engineering (CIE)</div>
+      <a class="email" href="mailto:jeevasd@iitdh.ac.in">✉ jeevasd@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="K V Sarma Internal Auditor On Contract Internal Audit sarmakandala@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>K V Sarma</h3>
+      <div class="role">Internal Auditor [On Contract]</div>
+      <div class="section">Internal Audit</div>
+      <a class="email" href="mailto:sarmakandala@iitdh.ac.in">✉ sarmakandala@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Kanaka Suresh Macherla Database Administrator On Contract ERP Cell mksuresh@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Kanaka Suresh Macherla</h3>
+      <div class="role">Database Administrator [On Contract]</div>
+      <div class="section">ERP Cell</div>
+      <a class="email" href="mailto:mksuresh@iitdh.ac.in">✉ mksuresh@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Karthick S Junior Technical Superintendent Civil Infrastructure Engineering CIE karthick.s@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Karthick S</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Civil &amp; Infrastructure Engineering (CIE)</div>
+      <a class="email" href="mailto:karthick.s@iitdh.ac.in">✉ karthick.s@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Kenchappa Sasanur Junior Assistant Civil Infrastructure Engineering CIE Mechanical Materials Aerospace Engineering MMAE kenchappasasanur@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Kenchappa Sasanur</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Civil &amp; Infrastructure Engineering (CIE), Mechanical, Materials and Aerospace Engineering (MMAE)</div>
+      <a class="email" href="mailto:kenchappasasanur@iitdh.ac.in">✉ kenchappasasanur@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Khandu Ashokrao Dinde Junior Superintendent Registrar Office k.dinde@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Khandu Ashokrao Dinde</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Registrar Office</div>
+      <a class="email" href="mailto:k.dinde@iitdh.ac.in">✉ k.dinde@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Kuldeep Singh Junior Technical Superintendent Mechanical Materials Aerospace Engineering MMAE kuldeepsingh@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Kuldeep Singh</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Mechanical, Materials and Aerospace Engineering (MMAE)</div>
+      <a class="email" href="mailto:kuldeepsingh@iitdh.ac.in">✉ kuldeepsingh@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Laxman B Khanappanavar Junior Assistant Materials Management Division laxmanbk@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Laxman B Khanappanavar</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Materials Management Division</div>
+      <a class="email" href="mailto:laxmanbk@iitdh.ac.in">✉ laxmanbk@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Madhu E S Junior Superintendent Knowledge Resource Information Knowledge Centre madhu@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Madhu E S</h3>
+      <div class="role">Junior Superintendent (Knowledge Resource and Information)</div>
+      <div class="section">Knowledge Centre</div>
+      <a class="email" href="mailto:madhu@iitdh.ac.in">✉ madhu@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Mallanagoud S Patil Junior Assistant Research Development Section mallanagoud@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Mallanagoud S Patil</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Research &amp; Development Section</div>
+      <a class="email" href="mailto:mallanagoud@iitdh.ac.in">✉ mallanagoud@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Mallesh Hanamappa Gunari Junior Assistant Internal Audit Student Welfare Wellness malleshgunari@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Mallesh Hanamappa Gunari</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Internal Audit, Student Welfare - Wellness</div>
+      <a class="email" href="mailto:malleshgunari@iitdh.ac.in">✉ malleshgunari@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Manigandan C Junior Engineer Civil Infrastructure Planning Support Section manigandan@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Manigandan C</h3>
+      <div class="role">Junior Engineer (Civil)</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:manigandan@iitdh.ac.in">✉ manigandan@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Manjunath S Gomappanavar Junior Technical Superintendent Electrical Electronics Communication Engineering EECE sg.manjunath@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Manjunath S Gomappanavar</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Electrical, Electronics and Communication Engineering (EECE)</div>
+      <a class="email" href="mailto:sg.manjunath@iitdh.ac.in">✉ sg.manjunath@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Manjunath S Koparde Senior Technical Superintendent Electrical Electronics Communication Engineering EECE manjunath.sk@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Manjunath S Koparde</h3>
+      <div class="role">Senior Technical Superintendent</div>
+      <div class="section">Electrical, Electronics and Communication Engineering (EECE)</div>
+      <a class="email" href="mailto:manjunath.sk@iitdh.ac.in">✉ manjunath.sk@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Manjunatha U B Junior Assistant Academics Section manjuub@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Manjunatha U B</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Academics Section</div>
+      <a class="email" href="mailto:manjuub@iitdh.ac.in">✉ manjuub@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Mrutyunjay Chanabasappa Kadakol Junior Superintendent Knowledge Resource Information Knowledge Centre mrutyunjay.k@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Mrutyunjay Chanabasappa Kadakol</h3>
+      <div class="role">Junior Superintendent (Knowledge Resource and Information)</div>
+      <div class="section">Knowledge Centre</div>
+      <a class="email" href="mailto:mrutyunjay.k@iitdh.ac.in">✉ mrutyunjay.k@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Mrutyunjay K. Siddannavar Senior Technical Superintendent Electrical Electronics Communication Engineering EECE mrutyunjay.ks@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Mrutyunjay K. Siddannavar</h3>
+      <div class="role">Senior Technical Superintendent</div>
+      <div class="section">Electrical, Electronics and Communication Engineering (EECE)</div>
+      <a class="email" href="mailto:mrutyunjay.ks@iitdh.ac.in">✉ mrutyunjay.ks@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Murali Krishna Erukulla Training Placement Officer On Contract Career Development Cell muralik@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Murali Krishna Erukulla</h3>
+      <div class="role">Training and Placement Officer [On Contract]</div>
+      <div class="section">Career Development Cell</div>
+      <a class="email" href="mailto:muralik@iitdh.ac.in">✉ muralik@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Naveen Kamanakeri Junior Assistant Faculty Welfare naveenk@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Naveen Kamanakeri</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Faculty Welfare</div>
+      <a class="email" href="mailto:naveenk@iitdh.ac.in">✉ naveenk@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Navyashree Counselling Psychologist On Contract Student Welfare Wellness navyashree891@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Navyashree</h3>
+      <div class="role">Counselling Psychologist [On Contract]</div>
+      <div class="section">Student Welfare - Wellness</div>
+      <a class="email" href="mailto:navyashree891@iitdh.ac.in">✉ navyashree891@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Nethaji Kumar D Training Placement Officer On Contract Career Development Cell nethajikumar@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Nethaji Kumar D</h3>
+      <div class="role">Training and Placement Officer [On Contract]</div>
+      <div class="section">Career Development Cell</div>
+      <a class="email" href="mailto:nethajikumar@iitdh.ac.in">✉ nethajikumar@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Praddumn Dwivedi Junior Assistant Academics Section praddumn.dwivedi@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Praddumn Dwivedi</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Academics Section</div>
+      <a class="email" href="mailto:praddumn.dwivedi@iitdh.ac.in">✉ praddumn.dwivedi@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Prajwal M Kapileshwari Junior Superintendent Materials Management Division prajwalmk@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Prajwal M Kapileshwari</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Materials Management Division</div>
+      <a class="email" href="mailto:prajwalmk@iitdh.ac.in">✉ prajwalmk@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Pratibha Shankarappa Tigadi Junior Assistant Academics Section pratibhatigadi@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Pratibha Shankarappa Tigadi</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Academics Section</div>
+      <a class="email" href="mailto:pratibhatigadi@iitdh.ac.in">✉ pratibhatigadi@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Praveen Hiremath Electrical Engineer On Contract Infrastructure Planning Support Section praveenhiremath@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Praveen Hiremath</h3>
+      <div class="role">Electrical Engineer [On Contract]</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:praveenhiremath@iitdh.ac.in">✉ praveenhiremath@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Praveen M Hodlur Junior Superintendent Research Development Section praveenhodlur@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Praveen M Hodlur</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Research &amp; Development Section</div>
+      <a class="email" href="mailto:praveenhodlur@iitdh.ac.in">✉ praveenhodlur@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Praveenkumar Siddappa Metri Junior Technician Mechanical Materials Aerospace Engineering MMAE praveenkumar.metri@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Praveenkumar Siddappa Metri</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Mechanical, Materials and Aerospace Engineering (MMAE)</div>
+      <a class="email" href="mailto:praveenkumar.metri@iitdh.ac.in">✉ praveenkumar.metri@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Rahul Junior Technician Chemical Engineering rahul.som@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Rahul</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Chemical Engineering</div>
+      <a class="email" href="mailto:rahul.som@iitdh.ac.in">✉ rahul.som@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Ramachandran K Junior Technical Superintendent Physics ramachandran.k@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Ramachandran K</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Physics</div>
+      <a class="email" href="mailto:ramachandran.k@iitdh.ac.in">✉ ramachandran.k@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Ramesh Kumar Ram Assistant Registrar Materials Management Division rameshram@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Ramesh Kumar Ram</h3>
+      <div class="role">Assistant Registrar</div>
+      <div class="section">Materials Management Division</div>
+      <a class="email" href="mailto:rameshram@iitdh.ac.in">✉ rameshram@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Ravi Shivaprakash Galimath Junior Sports Officer Physical Education Section ravi@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Ravi Shivaprakash Galimath</h3>
+      <div class="role">Junior Sports Officer</div>
+      <div class="section">Physical Education Section</div>
+      <a class="email" href="mailto:ravi@iitdh.ac.in">✉ ravi@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Ravulapati Nagaraju Junior Superintendent Faculty Welfare r.nagaraju@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Ravulapati Nagaraju</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Faculty Welfare</div>
+      <a class="email" href="mailto:r.nagaraju@iitdh.ac.in">✉ r.nagaraju@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Rudramma M Tegur Developer On Contract ERP Cell rudrammategur@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Rudramma M Tegur</h3>
+      <div class="role">Developer [On Contract]</div>
+      <div class="section">ERP Cell</div>
+      <a class="email" href="mailto:rudrammategur@iitdh.ac.in">✉ rudrammategur@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Sameer Joshi Placement Executive on contract Career Development Cell sameerjoshi@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sameer Joshi</h3>
+      <div class="role">Placement Executive [on contract]</div>
+      <div class="section">Career Development Cell</div>
+      <a class="email" href="mailto:sameerjoshi@iitdh.ac.in">✉ sameerjoshi@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Sandeep Pareek Deputy Registrar Establishment Recruitment Finance Accounts General Administration spareek@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sandeep Pareek</h3>
+      <div class="role">Deputy Registrar</div>
+      <div class="section">Establishment, Recruitment (Faculty and Non-Faculty), Finance &amp; Accounts Section, General Administration Section</div>
+      <a class="email" href="mailto:spareek@iitdh.ac.in">✉ spareek@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Shashank Banavi Junior Assistant Contract Services Section shashank@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Shashank Banavi</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Contract &amp; Services Section</div>
+      <a class="email" href="mailto:shashank@iitdh.ac.in">✉ shashank@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Shreesha Chandran TV Junior Assistant Internal Audit shreeshachandran.tv@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Shreesha Chandran TV</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Internal Audit</div>
+      <a class="email" href="mailto:shreeshachandran.tv@iitdh.ac.in">✉ shreeshachandran.tv@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Shreya S Junior Technical Superintendent Computer Networking Communication System Section sshreya@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Shreya S</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Computer, Networking and Communication System Section</div>
+      <a class="email" href="mailto:sshreya@iitdh.ac.in">✉ sshreya@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Shri Y S Dixit Officer Special Duty Civil On Contract Infrastructure Planning Support Section ysdixit@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Shri Y S Dixit</h3>
+      <div class="role">Officer on Special Duty (Civil) [On Contract]</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:ysdixit@iitdh.ac.in">✉ ysdixit@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Shrinidhi H V Junior Engineer Electrical Infrastructure Planning Support Section shrinidhi.hv@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Shrinidhi H V</h3>
+      <div class="role">Junior Engineer(Electrical)</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:shrinidhi.hv@iitdh.ac.in">✉ shrinidhi.hv@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Sireesha Yeragurappagari Junior Superintendent Academics Section sireesha1040@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sireesha Yeragurappagari</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Academics Section</div>
+      <a class="email" href="mailto:sireesha1040@iitdh.ac.in">✉ sireesha1040@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Sirgireddy Janardhan Reddy Junior Assistant Hostel Manager Student Welfare Section sjanardhanreddy@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sirgireddy Janardhan Reddy</h3>
+      <div class="role">Junior Assistant (Hostel Manager)</div>
+      <div class="section">Student Welfare Section</div>
+      <a class="email" href="mailto:sjanardhanreddy@iitdh.ac.in">✉ sjanardhanreddy@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Srikanth Sambu Junior Superintendent Infrastructure Planning Support Section ssambu@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Srikanth Sambu</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:ssambu@iitdh.ac.in">✉ ssambu@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Sudip Mandal Junior Assistant Contract Services Section sudip.mandal@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sudip Mandal</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Contract &amp; Services Section</div>
+      <a class="email" href="mailto:sudip.mandal@iitdh.ac.in">✉ sudip.mandal@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Sujeendra Gowda Junior Technician Civil Infrastructure Engineering CIE sujeen.gowda@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sujeendra Gowda</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Civil &amp; Infrastructure Engineering (CIE)</div>
+      <a class="email" href="mailto:sujeen.gowda@iitdh.ac.in">✉ sujeen.gowda@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Sundeep P Executive Engineer Civil Infrastructure Planning Support Section sundeep.p@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sundeep P</h3>
+      <div class="role">Executive Engineer (Civil)</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:sundeep.p@iitdh.ac.in">✉ sundeep.p@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Sunil M Poojar Junior Assistant Finance Accounts Section sunilpoojar@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sunil M Poojar</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Finance &amp; Accounts Section</div>
+      <a class="email" href="mailto:sunilpoojar@iitdh.ac.in">✉ sunilpoojar@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Suresh Kanchapogu Junior Technical Superintendent Computer Networking Communication System Section suresh@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Suresh Kanchapogu</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Computer, Networking and Communication System Section</div>
+      <a class="email" href="mailto:suresh@iitdh.ac.in">✉ suresh@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Ujjawal Kumar Jha Developer On Contract ERP Cell ujjawal.jha@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Ujjawal Kumar Jha</h3>
+      <div class="role">Developer [On Contract]</div>
+      <div class="section">ERP Cell</div>
+      <a class="email" href="mailto:ujjawal.jha@iitdh.ac.in">✉ ujjawal.jha@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="V Subramanya Hanumanu Sai Junior Technician Physics subramanya@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>V Subramanya Hanumanu Sai</h3>
+      <div class="role">Junior Technician</div>
+      <div class="section">Physics</div>
+      <a class="email" href="mailto:subramanya@iitdh.ac.in">✉ subramanya@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Varun V Junior Assistant Infrastructure Planning Support Section varun.v@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Varun V</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Infrastructure, Planning and Support Section</div>
+      <a class="email" href="mailto:varun.v@iitdh.ac.in">✉ varun.v@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Veda Srikanth Junior Superintendent Finance Accounts Section vedasrikanth@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Veda Srikanth</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Finance &amp; Accounts Section</div>
+      <a class="email" href="mailto:vedasrikanth@iitdh.ac.in">✉ vedasrikanth@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Venkateswarlu PM Junior Technical Superintendent Mechanical Materials Aerospace Engineering MMAE venkateswarlupm@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Venkateswarlu PM</h3>
+      <div class="role">Junior Technical Superintendent</div>
+      <div class="section">Mechanical, Materials and Aerospace Engineering (MMAE)</div>
+      <a class="email" href="mailto:venkateswarlupm@iitdh.ac.in">✉ venkateswarlupm@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Vinayak Basavaraj Patil Junior Superintendent Contract Services Section vinayak.patil@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Vinayak Basavaraj Patil</h3>
+      <div class="role">Junior Superintendent</div>
+      <div class="section">Contract &amp; Services Section</div>
+      <a class="email" href="mailto:vinayak.patil@iitdh.ac.in">✉ vinayak.patil@iitdh.ac.in</a>
+    </div>
+  </div>
+
+  <div class="card" data-text="Vishalakshi Irappa Channannavar Junior Assistant Staff Section vishalakshi@iitdh.ac.in">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Vishalakshi Irappa Channannavar</h3>
+      <div class="role">Junior Assistant</div>
+      <div class="section">Staff Section</div>
+      <a class="email" href="mailto:vishalakshi@iitdh.ac.in">✉ vishalakshi@iitdh.ac.in</a>
+    </div>
+  </div>
+
+</div><!-- end cards-grid -->
+
+<!-- SOCIAL SIDEBAR -->
+<div class="social-sidebar">
+  <a href="#" title="Twitter/X">𝕏</a>
+  <a href="#" title="YouTube">▶</a>
+  <a href="#" title="LinkedIn">in</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-address">
+      INDIAN INSTITUTE OF TECHNOLOGY DHARWAD<br>
+      PERMANENT CAMPUS<br>
+      CHIKKAMALLIGAWAD<br>
+      DHARWAD - 580 011<br>
+      KARNATAKA<br>
+      BHARATA (INDIA)<br><br>
+      ✉ <a href="mailto:pro@iitdh.ac.in">pro@iitdh.ac.in</a><br>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+  <div>
+    <h4>Academics</h4>
+    <ul>
+      <li><a href="#">Announcements</a></li>
+      <li><a href="#">Departments</a></li>
+      <li><a href="#">Programs</a></li>
+      <li><a href="#">B.Tech Admissions</a></li>
+      <li><a href="#">BS Admissions</a></li>
+      <li><a href="#">M.Sc. Admissions</a></li>
+      <li><a href="#">M.Tech Admissions</a></li>
+      <li><a href="#">M.Tech (R) Admissions</a></li>
+      <li><a href="#">Ph.D Admissions</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Research</h4>
+    <ul>
+      <li><a href="#">Consultancy Projects</a></li>
+      <li><a href="#">IRINS</a></li>
+      <li><a href="#">Project Vacancies</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">Sponsored Projects</a></li>
+      <li><a href="#">R&amp;D Website</a></li>
+      <li><a href="#">Incubation Center</a></li>
+      <li><a href="#">SCIF</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>People</h4>
+    <ul>
+      <li><a href="#">Administration</a></li>
+      <li><a href="#">Faculty</a></li>
+      <li><a href="#">RA/iPDF</a></li>
+      <li><a href="#">Research Scholars</a></li>
+      <li><a href="#" class="active-link">Staff</a></li>
+      <li><a href="#">Students</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Quick Access</h4>
+    <ul>
+      <li><a href="#">About DHARWAD</a></li>
+      <li><a href="#">Anti-Ragging Cell</a></li>
+      <li><a href="#">Chief Vigilance Officer</a></li>
+      <li><a href="#">Counselling Center</a></li>
+      <li><a href="#">Creche Facility</a></li>
+      <li><a href="#">CSR Contribution</a></li>
+      <li><a href="#">Doctors' Availability</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Grievance Redressal</a></li>
+      <li><a href="#">ICC</a></li>
+      <li><a href="#">Intranet</a></li>
+      <li><a href="#">Moodle</a></li>
+      <li><a href="#">Old Website</a></li>
+      <li><a href="#">R&amp;D Website</a></li>
+      <li><a href="#">RTI</a></li>
+      <li><a href="#">Equal Opportunity Cell</a></li>
+      <li><a href="#">Tenders</a></li>
+      <li><a href="#">Transport</a></li>
+      <li><a href="#">Videos</a></li>
+      <li><a href="#">VPN Access</a></li>
+      <li><a href="#">IPS Website</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const deptSelect = document.getElementById('deptSelect');
+  const cards = document.querySelectorAll('.card');
+
+  function filterCards() {
+    const q = searchInput.value.toLowerCase();
+    const dept = deptSelect.value.toLowerCase();
+    cards.forEach(card => {
+      const text = (card.dataset.text + ' ' + card.textContent).toLowerCase();
+      const matchQ = !q || text.includes(q);
+      const matchDept = !dept || text.includes(dept.split('(')[0].trim().toLowerCase());
+      card.style.display = (matchQ && matchDept) ? '' : 'none';
+    });
+  }
+
+  searchInput.addEventListener('input', filterCards);
+  deptSelect.addEventListener('change', filterCards);
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

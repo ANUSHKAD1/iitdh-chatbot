@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research Associates (RA) / Post-Doctoral Fellows (iPDF) | IIT Dharwad</title>
+  <link rel="icon" type="image/jpeg" href="images/favicon.jpeg?v=2">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      background: #fff;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: #6a0572;
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 16px;
+      display: flex;
+      gap: 16px;
+    }
+    .top-bar a { color: #fff; text-decoration: none; }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px 24px;
+      border-bottom: 2px solid #6a0572;
+      gap: 16px;
+    }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-area img { height: 70px; }
+    .logo-text { line-height: 1.3; }
+    .logo-text .hindi { font-size: 13px; color: #444; }
+    .logo-text .english { font-size: 15px; font-weight: bold; color: #6a0572; letter-spacing: 0.5px; }
+
+    /* ── NAV ── */
+    nav {
+      background: #6a0572;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 16px;
+      font-size: 13px;
+      display: block;
+      transition: background 0.2s;
+    }
+    nav a:hover { background: #4a0352; }
+
+    /* ── PAGE TITLE ── */
+    .page-title {
+      text-align: center;
+      padding: 30px 16px 20px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* ── CATEGORY TABS ── */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 30px;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+    }
+    .tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 28px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #6a0572;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      border-right: 1px solid #ddd;
+      min-width: 110px;
+      transition: background 0.2s;
+    }
+    .tab:last-child { border-right: none; }
+    .tab:hover, .tab.active { background: #6a0572; color: #fff; }
+    .tab svg { width: 32px; height: 32px; margin-bottom: 6px; fill: currentColor; }
+    .tab.active { background: #6a0572; color: #fff; }
+    .tab.active svg { fill: #fff; }
+
+    /* ── SEARCH & FILTER ── */
+    .controls {
+      max-width: 900px;
+      margin: 0 auto 24px;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+    .controls label { font-size: 13px; font-weight: bold; }
+    .controls input[type="text"] {
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 13px;
+      width: 220px;
+      outline: none;
+    }
+    .controls input[type="text"]:focus { border-color: #6a0572; }
+    .controls select {
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 13px;
+      min-width: 200px;
+    }
+    .btn-ipdf {
+      background: #e6a817;
+      color: #fff;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    /* ── PERSON CARDS GRID ── */
+    .cards-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .card-photo {
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background: #e0d0e8;
+    }
+    .card-photo-placeholder {
+      width: 100px;
+      height: 120px;
+      background: #c9b5d4;
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6a0572;
+      font-size: 32px;
+    }
+    .card-info { flex: 1; }
+    .card-info h3 {
+      font-size: 15px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 3px;
+    }
+    .card-info .role {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .card-info .email {
+      font-size: 12px;
+      color: #6a0572;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+      text-decoration: none;
+    }
+    .card-info .email:hover { text-decoration: underline; }
+    .card-info .personal-page {
+      font-size: 12px;
+      color: #6a0572;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .card-info .personal-page:hover { text-decoration: underline; }
+    .card-info .label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #555;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .card-info .value {
+      font-size: 13px;
+      color: #333;
+      margin-top: 1px;
+      margin-bottom: 2px;
+      line-height: 1.4;
+    }
+    .card-info .interests {
+      font-size: 12px;
+      color: #555;
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1a2e;
+      color: #ccc;
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      font-size: 13px;
+    }
+    footer h4 {
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 6px;
+    }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 6px; }
+    footer ul li a { color: #bbb; text-decoration: none; font-size: 12px; }
+    footer ul li a:hover { color: #fff; }
+    .footer-address { font-size: 12px; line-height: 1.8; color: #bbb; }
+    .footer-address strong { color: #fff; font-size: 13px; }
+    .footer-address .email-link { color: #d4a0e0; }
+
+    /* ── SOCIAL SIDEBAR ── */
+    .social-sidebar {
+      position: fixed;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 100;
+    }
+    .social-sidebar a {
+      width: 32px;
+      height: 32px;
+      background: #6a0572;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      font-size: 14px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 700px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr 1fr; }
+      .tab { padding: 12px 14px; min-width: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Search...</a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <!-- IIT Dharwad SVG logo placeholder -->
+    <svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="35" cy="35" r="33" fill="#6a0572" opacity="0.12" stroke="#6a0572" stroke-width="2"/>
+      <text x="35" y="42" text-anchor="middle" font-size="13" font-weight="bold" fill="#6a0572" font-family="Arial">IIT</text>
+      <text x="35" y="55" text-anchor="middle" font-size="8" fill="#6a0572" font-family="Arial">DHARWAD</text>
+    </svg>
+    <div class="logo-text">
+      <div class="hindi">ਭਾਰਤੀਯ ਤੰਤ੍ਰਜ੍ਞਾਨ ਸੰਸ੍ਥੇ ਧਾਰਵਾਡ</div>
+      <div class="hindi">भारतीय प्रौद्योगिकी संस्थान धारवाड</div>
+      <div class="english">INDIAN INSTITUTE OF TECHNOLOGY DHARWAD</div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Leadership</a>
+  <a href="#">Recruitment</a>
+  <a href="#">Notifications</a>
+  <a href="#">Alumni &amp; Wellwishers</a>
+  <a href="#">Academics</a>
+  <a href="#">Campus</a>
+  <a href="#">Reports</a>
+  <a href="#">Contact Us</a>
+</nav>
+
+<!-- PAGE TITLE -->
+<div class="page-title">Research Associates (RA) / Post-Doctoral Fellows (iPDF)</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <a href="#" class="tab">
+    <!-- faculty icon -->
+    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    FACULTY
+  </a>
+  <a href="#" class="tab active">
+    <!-- group icon -->
+    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+    RA/IPDF
+  </a>
+  <a href="#" class="tab">
+    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    STAFF
+  </a>
+  <a href="#" class="tab">
+    <!-- graduation cap icon -->
+    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+    RESEARCH<br>SCHOLARS
+  </a>
+  <a href="#" class="tab">
+    <!-- advisors/star icon -->
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
+    ADVISORS
+  </a>
+  <a href="#" class="tab">
+    <!-- star/award icon -->
+    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+    FORMER<br>ASSOCIATES
+  </a>
+</div>
+
+<!-- SEARCH & FILTER -->
+<div class="controls">
+  <label>Search RA/iPDF</label>
+  <input type="text" placeholder="Enter here for search......"/>
+  <select>
+    <option value="">- Any -</option>
+    <option>Biosciences &amp; Bioengineering</option>
+    <option>Chemical Engineering</option>
+    <option>Chemistry</option>
+    <option>Civil &amp; Infrastructure Engineering</option>
+    <option>Computer Science &amp; Engineering</option>
+    <option>Electrical, Electronics &amp; Communication Engineering</option>
+    <option>Mechanical, Materials &amp; Aerospace Engineering</option>
+  </select>
+  <button class="btn-ipdf">IPDF</button>
+</div>
+
+<!-- CARDS -->
+<div class="cards-grid">
+
+  <!-- 1. Ankit Balvanshi -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Ankit Balvanshi</h3>
+      <div class="role">Research Associate - III, Civil &amp; Infrastructure Engineering (CIE)</div>
+      <a class="email" href="mailto:ra.ankitbalvanshi@iitdh.ac.in">✉ ra.ankitbalvanshi@iitdh.ac.in</a>
+      <a class="personal-page" href="#">🌐 Personal page</a>
+      <div class="label">Mentor:</div>
+      <div class="value">PROF. VenkappayyA R. dEsAi</div>
+      <div class="label">PHD</div>
+      <div class="value">Maulana Azad National Institute Of Technology (MANIT), Bhopal</div>
+      <div class="label">Areas of Interest:</div>
+    </div>
+  </div>
+
+  <!-- 2. Chandra Bhanu Gupt -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Chandra Bhanu Gupt</h3>
+      <div class="role">Institute Post-Doctoral Fellow (iPDF), Civil &amp; Infrastructure Engineering (CIE)</div>
+      <a class="email" href="mailto:cb.gupt@iitdh.ac.in">✉ cb.gupt@iitdh.ac.in</a>
+      <a class="personal-page" href="#">🌐 Personal page</a>
+      <div class="label">Mentor:</div>
+      <div class="value">Prof Giridhar Rajesh Bande</div>
+      <div class="label">PHD</div>
+      <div class="value">Indian Institute of Technology Guwahati</div>
+      <div class="label">Areas of Interest:</div>
+      <div class="interests">Geoenvironmental Engineering</div>
+    </div>
+  </div>
+
+  <!-- 3. Darshan C M -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Darshan C M</h3>
+      <div class="role">Research Associate - I, Biosciences and Bioengineering (BSBE)</div>
+      <a class="email" href="mailto:ra.darshancm@iitdh.ac.in">✉ ra.darshancm@iitdh.ac.in</a>
+      <a class="personal-page" href="#">🌐 Personal page</a>
+      <div class="label">Mentor:</div>
+      <div class="value">Prof Surya Pratap Singh</div>
+      <div class="label">PHD</div>
+      <div class="value">Manipal School of Life Sciences (MSLS), Manipal Academy of Higher Education (MAHE), Manipal</div>
+      <div class="label">Areas of Interest:</div>
+      <div class="interests">Biophysics, Biophotonics, Protein Chemistry, Optical Spectroscopy, Fluorescence Spectroscopy, Disease Diagnosis</div>
+    </div>
+  </div>
+
+  <!-- 4. Gobinda Das -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Gobinda Das</h3>
+      <div class="role">Research Associate - I, Civil &amp; Infrastructure Engineering (CIE)</div>
+      <a class="email" href="mailto:ra.gobinda@iitdh.ac.in">✉ ra.gobinda@iitdh.ac.in</a>
+      <a class="personal-page" href="#">🌐 Personal page</a>
+      <div class="label">Mentor:</div>
+      <div class="value">PRof Amarnath Hegde</div>
+      <div class="label">PHD</div>
+      <div class="value">Indian Institute of Technology Kanpur</div>
+      <div class="label">Areas of Interest:</div>
+      <div class="interests">Foundation Vibration, Ground Vibration Propagation and Mitigation, Machine Learning Applications in Geotechnical Engineering</div>
+    </div>
+  </div>
+
+  <!-- 5. Mallikarjunaswamy A M M -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Mallikarjunaswamy A M M</h3>
+      <div class="role">Research Associate - I, Chemistry</div>
+      <a class="email" href="mailto:ra.mallikarjuna@iitdh.ac.in">✉ ra.mallikarjuna@iitdh.ac.in</a>
+      <a class="personal-page" href="#">🌐 Personal page</a>
+      <div class="label">Mentor:</div>
+      <div class="value">PRof. Rajeswara Rao Malakalapalli</div>
+      <div class="label">PHD</div>
+      <div class="value">REVA University</div>
+      <div class="label">Areas of Interest:</div>
+      <div class="interests">Organic Synthesis, Medicinal Chemistry, Heterocyclic Chemistry, Green Chemistry Process Chemistry</div>
+    </div>
+  </div>
+
+  <!-- 6. Pavithra S -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Pavithra S</h3>
+      <div class="role">Research Associate - II, Mechanical, Materials and Aerospace Engineering (MMAE)</div>
+      <a class="email" href="mailto:ra.pavithras@iitdh.ac.in">✉ ra.pavithras@iitdh.ac.in</a>
+      <a class="personal-page" href="#">🌐 Personal page</a>
+      <div class="label">Mentor:</div>
+      <div class="value">PRof. Somashekara M. A.</div>
+      <div class="label">PHD</div>
+      <div class="value">Karunya University, Coimbatore</div>
+      <div class="label">Areas of Interest:</div>
+      <div class="interests">Material science, Energy storage, Additive manufacturing</div>
+    </div>
+  </div>
+
+  <!-- 7. Sakesh Kumar -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sakesh Kumar</h3>
+      <div class="role">Research Associate-1, Biosciences and Bioengineering (BSBE)</div>
+      <a class="email" href="mailto:ra.sakeshphd@iitdh.ac.in">✉ ra.sakeshphd@iitdh.ac.in</a>
+      <a class="personal-page" href="#">🌐 Personal page</a>
+      <div class="label">Mentor:</div>
+      <div class="value">Dr. Swananda Marathe</div>
+      <div class="label">PHD</div>
+      <div class="value">Council of Scientific &amp; Industrial Research (CSIR) - Central Drug Research Institute (CDRI), Lucknow.</div>
+      <div class="label">Areas of Interest:</div>
+      <div class="interests">GPCR-Pharmacology, Neuroscience, Cognition, Working Memory, Mood disorders, Drug Discovery and Behaviors.</div>
+    </div>
+  </div>
+
+  <!-- 8. Shreekanth Birgonda -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Shreekanth Birgonda</h3>
+      <div class="role">Research Associate - I, Civil &amp; Infrastructure Engineering (CIE)</div>
+      <a class="email" href="mailto:ra.shreekanth21@iitdh.ac.in">✉ ra.shreekanth21@iitdh.ac.in</a>
+      <a class="personal-page" href="#">🌐 Personal page</a>
+      <div class="label">Mentor:</div>
+      <div class="value">Prof Ramesh Nayaka</div>
+      <div class="label">PHD</div>
+      <div class="value">National Institute of Technology Tiruchirapalli</div>
+      <div class="label">Areas of Interest:</div>
+      <div class="interests">Self-Compacting Concrete (SCC), Sustainable Construction Materials, Geopolymer Concrete, Low-Carbon &amp; Green Concrete, Bio-Based Supplementary Cementitious Materials (SCMs), 3D Concrete Printing (3DCP), Repair Retrofitting &amp; Rehabilitation of Structures, Fire Performance of Low-Carbon Concretes</div>
+    </div>
+  </div>
+
+  <!-- 9. Sneha M -->
+  <div class="card">
+    <div class="card-photo-placeholder">👤</div>
+    <div class="card-info">
+      <h3>Sneha M</h3>
+      <div class="role">Research Associate - I, Electrical, Electronics and Communication Engineering (EECE)</div>
+      <a class="email" href="mailto:ra.sneham@iitdh.ac.in">✉ ra.sneham@iitdh.ac.in</a>
+      <div class="label">Mentor:</div>
+      <div class="value">Prof [Ms] Ruma Ghosh</div>
+      <div class="label">PHD</div>
+      <div class="value">Homi Bhabha National Institute (HBNI), Mumbai</div>
+      <div class="label">Areas of Interest:</div>
+      <div class="interests">Electrochemical Sensor, Biosensor</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SOCIAL SIDEBAR -->
+<div class="social-sidebar">
+  <a href="#" title="Twitter/X">𝕏</a>
+  <a href="#" title="YouTube">▶</a>
+  <a href="#" title="LinkedIn">in</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-address">
+      <strong>INDIAN INSTITUTE OF TECHNOLOGY DHARWAD</strong><br>
+      PERMANENT CAMPUS<br>
+      CHIKKAMALLIGAWAD<br>
+      DHARWAD - 580 011<br>
+      KARNATAKA<br>
+      BHARATA (INDIA)<br><br>
+      ✉ <a class="email-link" href="mailto:pro@iitdh.ac.in">pro@iitdh.ac.in</a><br>
+      <a class="email-link" href="#">Contact Us</a>
+    </div>
+  </div>
+  <div>
+    <h4>Academics</h4>
+    <ul>
+      <li><a href="#">Announcements</a></li>
+      <li><a href="#">Departments</a></li>
+      <li><a href="#">Programs</a></li>
+      <li><a href="#">B.Tech Admissions</a></li>
+      <li><a href="#">BS Admissions</a></li>
+      <li><a href="#">M.Sc. Admissions</a></li>
+      <li><a href="#">M.Tech Admissions</a></li>
+      <li><a href="#">Ph.D Admissions</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Research</h4>
+    <ul>
+      <li><a href="#">Consultancy Projects</a></li>
+      <li><a href="#">IRINS</a></li>
+      <li><a href="#">Project Vacancies</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">Sponsored Projects</a></li>
+      <li><a href="#">R&amp;D Website</a></li>
+      <li><a href="#">Incubation Center</a></li>
+      <li><a href="#">SCIF</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>People</h4>
+    <ul>
+      <li><a href="#">Administration</a></li>
+      <li><a href="#">Faculty</a></li>
+      <li><a href="#">RA/iPDF</a></li>
+      <li><a href="#">Research Scholars</a></li>
+      <li><a href="#">Staff</a></li>
+      <li><a href="#">Students</a></li>
+    </ul>
+    <br>
+    <h4>Quick Access</h4>
+    <ul>
+      <li><a href="#">About DHARWAD</a></li>
+      <li><a href="#">Anti-Ragging Cell</a></li>
+      <li><a href="#">RTI</a></li>
+      <li><a href="#">Tenders</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Simple search filter
+  const searchInput = document.querySelector('input[type="text"]');
+  const deptSelect = document.querySelector('select');
+  const cards = document.querySelectorAll('.card');
+
+  function filterCards() {
+    const q = searchInput.value.toLowerCase();
+    const dept = deptSelect.value.toLowerCase();
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const matchQ = !q || text.includes(q);
+      const matchDept = !dept || text.includes(dept.split('&')[0].trim().toLowerCase());
+      card.style.display = (matchQ && matchDept) ? '' : 'none';
+    });
+  }
+
+  searchInput.addEventListener('input', filterCards);
+  deptSelect.addEventListener('change', filterCards);
+
+  // Tab active toggle
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

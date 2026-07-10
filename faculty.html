@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="images/favicon.jpeg?v=2">
+    <title>Faculty | IIT Dharwad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            font-size: 14px;
+        }
+
+        /* Top utility bar */
+        .top-bar {
+            background: #6a1f8a;
+            color: white;
+            font-size: 12px;
+            padding: 4px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 14px;
+            font-size: 12px;
+        }
+
+        .top-bar .right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-bar .search-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 2px 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .top-bar .search-bar input {
+            border: none;
+            outline: none;
+            font-size: 11px;
+            width: 120px;
+            color: #333;
+        }
+
+        .top-bar .myiit {
+            background: #e8a800;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Main header */
+        .main-header {
+            background: white;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text .kan {
+            font-size: 11px;
+            color: #555;
+        }
+
+        .logo-text .eng {
+            font-size: 13px;
+            color: #333;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text .sub {
+            font-size: 10px;
+            color: #777;
+            letter-spacing: 1px;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #222;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .main-nav a:hover {
+            color: #6a1f8a;
+        }
+
+        /* Page content */
+        .content {
+            background: white;
+            padding: 30px 40px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 24px;
+        }
+
+        /* Faculty type icons row */
+        .icon-row {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 30px;
+        }
+
+        .icon-box {
+            width: 112px;
+            background: #6a1f8a;
+            color: white;
+            text-align: center;
+            padding: 16px 8px 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+        }
+
+        .icon-box.active::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: #f5a623;
+        }
+
+        .icon-box svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .icon-box .label {
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .icon-box-outline {
+            width: 112px;
+            background: white;
+            border: 1.5px solid #6a1f8a;
+            color: #6a1f8a;
+            text-align: center;
+            padding: 16px 8px 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .icon-box-outline svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .icon-box-outline .label {
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        /* Legend */
+        .legend {
+            margin-bottom: 16px;
+            line-height: 1.9;
+        }
+
+        .legend a {
+            color: #6a1f8a;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .legend a:hover {
+            text-decoration: underline;
+        }
+
+        /* Search + buttons row */
+        .search-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            border: 1px solid #ccc;
+            padding: 6px 12px;
+            font-size: 13px;
+            width: 220px;
+            outline: none;
+            color: #aaa;
+        }
+
+        .btn-faculty {
+            background: #e8a800;
+            color: white;
+            border: none;
+            padding: 7px 18px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btn-dept {
+            background: white;
+            color: #333;
+            border: 1.5px solid #999;
+            padding: 6px 16px;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Department dropdown */
+        .dept-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .dept-label {
+            font-size: 13px;
+            color: #333;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .dept-select {
+            border: 1px solid #ccc;
+            padding: 6px 30px 6px 10px;
+            font-size: 13px;
+            width: 320px;
+            outline: none;
+            color: #555;
+        }
+
+        /* Faculty card */
+        .faculty-card {
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            background: white;
+            margin-bottom: 16px;
+        }
+
+        .faculty-photo {
+            width: 90px;
+            height: 105px;
+            flex-shrink: 0;
+            background: #c9b8d8;
+            overflow: hidden;
+        }
+
+        .faculty-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .faculty-info {
+            flex: 1;
+        }
+
+        .faculty-name {
+            font-size: 17px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 4px;
+        }
+
+        .faculty-roles {
+            margin-bottom: 6px;
+        }
+
+        .faculty-roles li {
+            font-size: 13px;
+            color: #333;
+            list-style: disc;
+            margin-left: 18px;
+            line-height: 1.7;
+        }
+
+        .faculty-links {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .faculty-links a {
+            color: #6a1f8a;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .faculty-links a:hover {
+            text-decoration: underline;
+        }
+
+        .faculty-phd-label {
+            font-weight: bold;
+            font-size: 13px;
+            color: #222;
+        }
+
+        .faculty-phd-inst {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .research-text {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .meta-row {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .meta-row b {
+            font-size: 11px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Social sidebar */
+        .social-sidebar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            z-index: 99;
+        }
+
+        .soc-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .soc-x {
+            background: #000;
+        }
+
+        .soc-yt {
+            background: #c00;
+        }
+
+        .soc-li {
+            background: #0077b5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top utility bar -->
+    <div class="top-bar">
+        <div>
+            <a href="#">About</a>
+            <a href="#" style="background:#5a1070; padding:2px 8px;">Leadership</a>
+            <a href="#">Recruitment</a>
+            <a href="#">Notifications</a>
+            <a href="#">Alumni &amp; Wellwishers</a>
+            <a href="#">NIRF</a>
+        </div>
+        <div class="right">
+            <div class="search-bar">
+                <span style="color:#aaa; font-size:12px;">&#128269;</span>
+                <input type="text" placeholder="Search...">
+            </div>
+            <span class="myiit">&#8853; myIIT</span>
+            <span style="color:white; font-size:11px;">A&nbsp; A &nbsp;A+</span>
+        </div>
+    </div>
+
+    <!-- Main header -->
+    <div class="main-header">
+        <div class="logo-area">
+            <svg viewBox="0 0 60 60" width="60" height="60">
+                <rect width="60" height="60" fill="#f8f8f8" rx="2" />
+                <text x="30" y="14" text-anchor="middle" font-size="6" fill="#555">ಭಾರತೀಯ ತಂತ್ರಜ್ಞಾನ</text>
+                <text x="30" y="22" text-anchor="middle" font-size="5.5" fill="#555">ಸಂಸ್ಥೆ ಧಾರವಾಡ</text>
+                <circle cx="30" cy="44" r="12" fill="none" stroke="#6a1f8a" stroke-width="1.5" />
+                <text x="30" y="41" text-anchor="middle" font-size="5" fill="#6a1f8a">INDIAN INSTITUTE</text>
+                <text x="30" y="48" text-anchor="middle" font-size="5" fill="#6a1f8a">OF TECHNOLOGY</text>
+                <text x="30" y="55" text-anchor="middle" font-size="5" fill="#6a1f8a">DHARWAD</text>
+            </svg>
+            <div class="logo-text">
+                <div class="kan">ಭಾರತೀಯ ತಂತ್ರಜ್ಞಾನ ಸಂಸ್ಥೆ ಧಾರವಾಡ</div>
+                <div class="eng">INDIAN INSTITUTE OF TECHNOLOGY DHARWAD</div>
+                <div class="sub">भारतीय प्रौद्योगिकी संस्थान धारवाड़</div>
+            </div>
+        </div>
+        <div class="main-nav">
+            <a href="#">ACADEMICS</a>
+            <a href="#">ADMISSIONS</a>
+            <a href="#">CAMPUS LIFE</a>
+            <a href="#">RESEARCH</a>
+        </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="content">
+
+        <div class="page-title">Faculty</div>
+
+        <!-- Icon row -->
+        <div class="icon-row">
+            <!-- FACULTY (active) -->
+            <div class="icon-box active">
+                <svg viewBox="0 0 40 40" fill="white">
+                    <circle cx="20" cy="13" r="7" />
+                    <path d="M6 36c0-8 6-13 14-13s14 5 14 13" />
+                </svg>
+                <div class="label">FACULTY</div>
+            </div>
+            <!-- RA/IPDF -->
+            <a href="RA_IPDF.html" class="icon-box">
+                <svg viewBox="0 0 40 40" fill="white">
+                    <circle cx="13" cy="13" r="6" />
+                    <circle cx="27" cy="13" r="6" />
+                    <path d="M2 34c0-7 5-11 11-11s11 4 11 11" />
+                    <path d="M16 34c0-7 5-11 11-11s11 4 11 11" />
+                </svg>
+
+                <div class="label">RA/IPDF</div>
+            </a>
+            <!-- STAFF -->
+            <a href="staff.html" class="icon-box">
+                <svg viewBox="0 0 40 40" fill="white">
+                    <circle cx="13" cy="13" r="6" />
+                    <circle cx="27" cy="13" r="6" />
+                    <path d="M2 34c0-7 5-11 11-11s11 4 11 11" />
+                    <path d="M16 34c0-7 5-11 11-11s11 4 11 11" />
+                </svg>
+
+                <div class="label">STAFF</div>
+            </a>
+            <!-- RESEARCH SCHOLARS -->
+            <a href="research_scholars.html" class="icon-box">
+                <svg viewBox="0 0 40 40" fill="white">
+                    <circle cx="13" cy="13" r="6" />
+                    <circle cx="27" cy="13" r="6" />
+                    <path d="M2 34c0-7 5-11 11-11s11 4 11 11" />
+                    <path d="M16 34c0-7 5-11 11-11s11 4 11 11" />
+                </svg>
+
+                <div class="label">RESEARCH SCHOLARS</div>
+            </a>
+            <!-- ADVISORS -->
+            <a href="advisors.html" class="icon-box">
+                <svg viewBox="0 0 40 40" fill="white">
+                    <circle cx="13" cy="13" r="6" />
+                    <circle cx="27" cy="13" r="6" />
+                    <path d="M2 34c0-7 5-11 11-11s11 4 11 11" />
+                    <path d="M16 34c0-7 5-11 11-11s11 4 11 11" />
+                </svg>
+
+                <div class="label">ADVISORS</div>
+            </a>
+            <!-- FORMER ASSOCIATES (outline) -->
+            <a href="former_associates.html" class="icon-box">
+                <svg viewBox="0 0 40 40" fill="white">
+                    <circle cx="13" cy="13" r="6" />
+                    <circle cx="27" cy="13" r="6" />
+                    <path d="M2 34c0-7 5-11 11-11s11 4 11 11" />
+                    <path d="M16 34c0-7 5-11 11-11s11 4 11 11" />
+                </svg>
+
+                <div class="label">FORMER ASSOCIATES</div>
+            </a>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <a href="#">PROF</a><span style="color:#333; font-size:13px;"> - Professor/Emeritus Professor/Distinguished
+                Honorary Professor/Visiting Professor/Professor of Practice/Adjunct Professor/Honorary Adjunct
+                Professor</span><br>
+            <a href="#">PRof</a><span style="color:#333; font-size:13px;"> - Associate Professor</span><br>
+            <a href="#">Prof</a><span style="color:#333; font-size:13px;"> - Assistant Professor</span>
+        </div>
+
+        <!-- Search row -->
+        <div class="search-row">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:13px; color:#333;">Search Faculty</span>
+                <input class="search-input" type="text" placeholder="Enter here for search.....">
+            </div>
+            <div class="btn-group">
+                <button class="btn-faculty">Faculty</button>
+                <button class="btn-dept">Show Department-wise</button>
+            </div>
+        </div>
+
+        <!-- Department dropdown -->
+        <div class="dept-row">
+            <span class="dept-label">Department</span>
+            <select class="dept-select">
+                <option>- Any -</option>
+                <option>Computer Science and Engineering</option>
+                <option>Electrical, Electronics and Communication Engineering</option>
+                <option>Mechanical and Aerospace Engineering</option>
+                <option>Civil Engineering</option>
+                <option>Physics</option>
+                <option>Mathematics</option>
+            </select>
+        </div>
+
+        <!-- Faculty card -->
+        <div class="faculty-card">
+            <div class="faculty-photo">
+                <svg viewBox="0 0 90 105" width="90" height="105">
+                    <rect width="90" height="105" fill="#c9b8d8" />
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+                </svg>
+            </div>
+            <div class="faculty-info">
+                <div class="faculty-name">PRof Abhijit Kshirsagar</div>
+                <ul class="faculty-roles">
+                    <li>Associate Professor, Electrical, Electronics and Communication Engineering (EECE)</li>
+                    <li>Associate Dean, Infrastructure, Planning &amp; Support (IPS) - Electrical Engineering</li>
+                </ul>
+                <div class="faculty-links">
+                    <a href="#">&#9993; kabhijit@iitdh.ac.in</a>
+                    <a href="#">View Profile</a>
+                    <a href="#">Personal page</a>
+                </div>
+                <div class="faculty-phd-label">PhD</div>
+                <div class="faculty-phd-inst">Indian Institute of Science Bangalore</div>
+                <div class="section-label">Areas of Research Interest:</div>
+                <div class="research-text">Power Electronics and Drives, Renewable Energy, Solar Inverters, EV Chargers,
+                    Power Supplies</div>
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-I (Engineering) [A1 - 422]</div>
+                <div class="meta-row"><b>TELEPHONE EXTENSION:</b> 1034</div>
+                <div class="meta-row"><b>LANDLINE:</b> [+836] 2309682</div>
+            </div>
+        </div>
+
+
+        <!-- ================= Faculty Card 2 ================= -->
+
+        <div class="faculty-card">
+            <div class="faculty-photo">
+                <svg viewBox="0 0 90 105" width="90" height="105">
+                    <rect width="90" height="105" fill="#c9b8d8" />
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+                </svg>
+            </div>
+
+            <div class="faculty-info">
+
+                <div class="faculty-name">Prof Achyut Mani Tripathi</div>
+
+                <ul class="faculty-roles">
+                    <li>Assistant Professor, Computer Science and Engineering (CSE)</li>
+                    <li>Faculty In-Charge Students Welfare (SW) - Mess &amp; Canteen</li>
+                </ul>
+
+                <div class="faculty-links">
+                    <a href="#">&#9993; t.achyut@iitdh.ac.in</a>
+                    <a href="#">View Profile</a>
+                    <a href="#">Personal page</a>
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+                <div class="faculty-phd-inst">Indian Institute of Technology Guwahati</div>
+
+                <div class="section-label">Areas of Research Interest:</div>
+
+                <div class="research-text">
+
+                    Deep Learning for Sound Classification,
+                    Adversarial Attacks,
+                    Knowledge Distillation,
+                    Multi-modal Learning,
+                    Audio-Visual Question Answering,
+                    Audio-Visual Scene Classification
+
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-I (Engineering) [A1 - 129]</div>
+                <div class="meta-row"><b>TELEPHONE EXTENSION :</b> 1084</div>
+                <div class="meta-row"><b>LANDLINE :</b> [+836] 2309730</div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= Faculty Card 3 ================= -->
+
+        <div class="faculty-card">
+
+            <div class="faculty-photo">
+
+                <svg viewBox="0 0 90 105" width="90" height="105">
+
+                    <rect width="90" height="105" fill="#c9b8d8" />
+
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+
+                </svg>
+
+            </div>
+
+            <div class="faculty-info">
+
+                <div class="faculty-name">PRof Amar Keshav Gaonkar</div>
+
+                <ul class="faculty-roles">
+
+                    <li>Associate Professor, Mechanical, Materials and Aerospace Engineering (MMAE)</li>
+
+                    <li>Associate Dean, Entrepreneurship, Incubation and DhaRti (EID)</li>
+
+                    <li>Member, Senate</li>
+
+                </ul>
+
+                <div class="faculty-links">
+
+                    <a href="#">&#9993; amar.gaonkar@iitdh.ac.in</a>
+
+                    <a href="#">View Profile</a>
+
+                    <a href="#">Personal page</a>
+
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+
+                <div class="faculty-phd-inst">
+
+                    Indian Institute of Technology Bombay
+
+                </div>
+
+                <div class="section-label">
+
+                    Areas of Research Interest:
+
+                </div>
+
+                <div class="research-text">
+
+                    Computational Mechanics,
+
+                    Finite Element Methods,
+
+                    Model Order Reduction,
+
+                    Thin Film Dynamics,
+
+                    Modeling and Simulations
+
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-I (Engineering) [A1 - 617]</div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= Faculty Card 4 ================= -->
+
+        <div class="faculty-card">
+
+            <div class="faculty-photo">
+
+                <svg viewBox="0 0 90 105" width="90" height="105">
+
+                    <rect width="90" height="105" fill="#c9b8d8" />
+
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+
+                </svg>
+
+            </div>
+
+            <div class="faculty-info">
+
+                <div class="faculty-name">Prof Ashok Kumar Ummireddi</div>
+
+                <ul class="faculty-roles">
+
+                    <li>Assistant Professor, Chemical Engineering</li>
+
+                    <li>Faculty In-Charge Continuing Education Program (CEP) and Quality Improvement Program (QIP)</li>
+
+                </ul>
+
+                <div class="faculty-links">
+
+                    <a href="#">&#9993; ashok@iitdh.ac.in</a>
+
+                    <a href="#">View Profile</a>
+
+                    <a href="#">Personal page</a>
+
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+
+                <div class="faculty-phd-inst">
+
+                    Indian Institute of Technology Kanpur
+
+                </div>
+
+                <div class="section-label">
+
+                    Areas of Research Interest:
+
+                </div>
+
+                <div class="research-text">
+
+                    Electrocatalysis and Energy Storage,
+
+                    Electrochemical CO₂ Conversion,
+
+                    Water Splitting,
+
+                    Hydrogen Production,
+
+                    Electrochemical Ammonia Synthesis
+
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-II (Science) [A2 - 219]</div>
+
+                <div class="meta-row"><b>TELEPHONE EXTENSION :</b> 1093</div>
+
+                <div class="meta-row"><b>LANDLINE :</b> [+836] 2309739</div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= Faculty Card 5 ================= -->
+
+        <div class="faculty-card">
+
+            <div class="faculty-photo">
+
+                <svg viewBox="0 0 90 105" width="90" height="105">
+
+                    <rect width="90" height="105" fill="#c9b8d8" />
+
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+
+                </svg>
+
+            </div>
+
+            <div class="faculty-info">
+
+                <div class="faculty-name">PRof B N Bharath</div>
+
+                <ul class="faculty-roles">
+
+                    <li>Associate Professor, Electrical, Electronics and Communication Engineering (EECE)</li>
+
+                    <li>Chief Vigilance Officer</li>
+
+                    <li>Member, Senate</li>
+
+                </ul>
+
+                <div class="faculty-links">
+
+                    <a href="#">&#9993; bharathbn@iitdh.ac.in</a>
+
+                    <a href="#">View Profile</a>
+
+                    <a href="#">Personal page</a>
+
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+
+                <div class="faculty-phd-inst">
+
+                    Indian Institute of Science Bangalore
+
+                </div>
+
+                <div class="section-label">
+
+                    Areas of Research Interest:
+
+                </div>
+
+                <div class="research-text">
+
+                    Cellular Networks,
+
+                    Federated Learning,
+
+                    Bilevel Optimization,
+
+                    Distributed Stochastic Optimization,
+
+                    Signal Processing
+
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-I (Engineering) [A1 - 326]</div>
+
+                <div class="meta-row"><b>TELEPHONE EXTENSION :</b> 1015</div>
+
+                <div class="meta-row"><b>LANDLINE :</b> [+836] 2309664</div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= Faculty Card 6 ================= -->
+
+        <div class="faculty-card">
+            <div class="faculty-photo">
+                <svg viewBox="0 0 90 105" width="90" height="105">
+                    <rect width="90" height="105" fill="#c9b8d8" />
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+                </svg>
+            </div>
+
+            <div class="faculty-info">
+                <div class="faculty-name">Prof Bal Krishna Chaube</div>
+
+                <ul class="faculty-roles">
+                    <li>Assistant Professor, Biosciences and Bioengineering (BSBE)</li>
+                    <li>Faculty In-Charge (Academic Programmes - PG)</li>
+                    <li>Faculty In-Charge Rajbhasha Activities</li>
+                </ul>
+
+                <div class="faculty-links">
+                    <a href="#">&#9993; balkrishna@iitdh.ac.in</a>
+                    <a href="#">View Profile</a>
+                    <a href="#">Personal page</a>
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+                <div class="faculty-phd-inst">
+                    Department of Biotechnology (DBT) - National Centre for Cell Sciences, Pune
+                </div>
+
+                <div class="section-label">Areas of Research Interest:</div>
+
+                <div class="research-text">
+                    Cardiovascular Disorders,
+                    Cancer Metabolism,
+                    Endothelial Cell Biology,
+                    Lipid & Lipoprotein Metabolism,
+                    Angiogenesis,
+                    Cellular Bioenergetics
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-II (Science) [A2 - 340]</div>
+                <div class="meta-row"><b>TELEPHONE EXTENSION :</b> 1094</div>
+                <div class="meta-row"><b>LANDLINE :</b> [+836] 2309740</div>
+
+            </div>
+        </div>
+
+
+        <!-- ================= Faculty Card 7 ================= -->
+
+        <div class="faculty-card">
+
+            <div class="faculty-photo">
+                <svg viewBox="0 0 90 105" width="90" height="105">
+                    <rect width="90" height="105" fill="#c9b8d8" />
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+                </svg>
+            </div>
+
+            <div class="faculty-info">
+
+                <div class="faculty-name">PRof C Ravikumar</div>
+
+                <ul class="faculty-roles">
+                    <li>Associate Professor, Chemical Engineering</li>
+                    <li>Associate Dean, General Outreach</li>
+                    <li>Member, Senate</li>
+                </ul>
+
+                <div class="faculty-links">
+                    <a href="#">&#9993; ravikumar@iitdh.ac.in</a>
+                    <a href="#">View Profile</a>
+                    <a href="#">Personal page</a>
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+
+                <div class="faculty-phd-inst">
+                    Indian Institute of Technology Bombay
+                </div>
+
+                <div class="section-label">
+                    Areas of Research Interest:
+                </div>
+
+                <div class="research-text">
+                    Nanoparticles,
+                    Colloids,
+                    Interface Science,
+                    Catalysis,
+                    Drug Delivery,
+                    Water Treatment,
+                    Modeling & Simulation
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-II (Science) [A2 - 220]</div>
+                <div class="meta-row"><b>TELEPHONE EXTENSION :</b> 1095</div>
+                <div class="meta-row"><b>LANDLINE :</b> [+836] 2309741</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= Faculty Card 8 ================= -->
+
+        <div class="faculty-card">
+
+            <div class="faculty-photo">
+                <svg viewBox="0 0 90 105" width="90" height="105">
+                    <rect width="90" height="105" fill="#c9b8d8" />
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+                </svg>
+            </div>
+
+            <div class="faculty-info">
+
+                <div class="faculty-name">Prof Gopal Krishna Kamath M</div>
+
+                <ul class="faculty-roles">
+                    <li>Assistant Professor, Electrical, Electronics and Communication Engineering (EECE)</li>
+                    <li>Faculty In-Charge Academic Programs (UG-2)</li>
+                </ul>
+
+                <div class="faculty-links">
+                    <a href="#">&#9993; gopal.kamath@iitdh.ac.in</a>
+                    <a href="#">View Profile</a>
+                    <a href="#">Personal page</a>
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+
+                <div class="faculty-phd-inst">
+                    Indian Institute of Technology Madras
+                </div>
+
+                <div class="section-label">
+                    Areas of Research Interest:
+                </div>
+
+                <div class="research-text">
+                    Control and Security of Cyber-Physical Systems,
+                    Intelligent Transportation Networks,
+                    Communication-Control Co-Design,
+                    Delayed Dynamical Systems
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-I (Engineering) [A1 - 339]</div>
+                <div class="meta-row"><b>TELEPHONE EXTENSION :</b> 1066</div>
+                <div class="meta-row"><b>LANDLINE :</b> [+836] 2309713</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= Faculty Card 9 ================= -->
+
+        <div class="faculty-card">
+
+            <div class="faculty-photo">
+                <svg viewBox="0 0 90 105" width="90" height="105">
+                    <rect width="90" height="105" fill="#c9b8d8" />
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+                </svg>
+            </div>
+
+            <div class="faculty-info">
+
+                <div class="faculty-name">PRof Gopal Sharan Parashari</div>
+
+                <ul class="faculty-roles">
+                    <li>Associate Professor, Humanities, Economics, Arts and Rural Technologies (HEART)</li>
+                    <li>Chairperson, Joint Entrance Examination (JEE)</li>
+                    <li>Associate Dean, Admin (Contract & Services, KV & Creche)</li>
+                    <li>Faculty In-Charge Bhasha Samyojan</li>
+                    <li>Member, Senate</li>
+                </ul>
+
+                <div class="faculty-links">
+                    <a href="#">&#9993; gp@iitdh.ac.in</a>
+                    <a href="#">View Profile</a>
+                    <a href="#">Personal page</a>
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+
+                <div class="faculty-phd-inst">
+                    Indian Institute of Technology Kanpur
+                </div>
+
+                <div class="section-label">
+                    Areas of Research Interest:
+                </div>
+
+                <div class="research-text">
+                    Applied Microeconomic Theory,
+                    Applied Game Theory,
+                    Economics of Conflict,
+                    Agriculture Economics
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-II (Science) [A2 - 133]</div>
+                <div class="meta-row"><b>TELEPHONE EXTENSION :</b> 1051</div>
+                <div class="meta-row"><b>LANDLINE :</b> [+836] 2309699</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= Faculty Card 10 ================= -->
+
+        <div class="faculty-card">
+
+            <div class="faculty-photo">
+                <svg viewBox="0 0 90 105" width="90" height="105">
+                    <rect width="90" height="105" fill="#c9b8d8" />
+                    <circle cx="45" cy="38" r="22" fill="#8b6fa8" />
+                    <ellipse cx="45" cy="100" rx="35" ry="22" fill="#8b6fa8" />
+                    <rect x="28" y="60" width="34" height="28" rx="2" fill="#5b7fba" />
+                </svg>
+            </div>
+
+            <div class="faculty-info">
+
+                <div class="faculty-name">Prof Hemanth Kumar Chinthapalli</div>
+
+                <ul class="faculty-roles">
+                    <li>Assistant Professor, Civil & Infrastructure Engineering (CIE)</li>
+                    <li>Faculty In-Charge Infrastructure, Planning & Support (IPS) - Civil</li>
+                </ul>
+
+                <div class="faculty-links">
+                    <a href="#">&#9993; hemanth.ch@iitdh.ac.in</a>
+                    <a href="#">View Profile</a>
+                    <a href="#">Personal page</a>
+                </div>
+
+                <div class="faculty-phd-label">PhD</div>
+
+                <div class="faculty-phd-inst">
+                    University of Malaya, Malaysia
+                </div>
+
+                <div class="section-label">
+                    Areas of Research Interest:
+                </div>
+
+                <div class="research-text">
+                    Structural Engineering,
+                    Construction Materials,
+                    3D Concrete Printing,
+                    Sustainable Infrastructure,
+                    Concrete Technology
+                </div>
+
+                <div class="meta-row"><b>LOCATION :</b> Academic Block-I (Engineering) [A1 - 530]</div>
+                <div class="meta-row"><b>TELEPHONE EXTENSION :</b> 1063</div>
+                <div class="meta-row"><b>LANDLINE :</b> [+836] 2309711</div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <!-- Social sidebar -->
+    <div class="social-sidebar">
+        <a class="soc-btn soc-x" href="#">&#x1D54F;</a>
+        <a class="soc-btn soc-yt" href="#">&#9654;</a>
+        <a class="soc-btn soc-li" href="#">in</a>
+    </div>
+
+</body>
+
+</html>
